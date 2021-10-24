@@ -1,0 +1,38 @@
+created: 20211022225251013
+modified: 20211024083502867
+tags: 
+title: Make a PR
+
+\define inputActions()
+<$action-deletetiddler $tiddler="$:/state/makepr/prlink"/>
+\end
+
+\define makePRActions()
+<$action-sendmessage
+	$message="tm-makepr"
+	$param={{$:/temp/pr-tiddlers}}
+	slug={{{ [{$:/temp/pr-title}slugify[]] }}}
+/>
+\end
+
+|tc-import-table tc-edit-field-value|k
+|[[Github Personal Access Token|https://github.com/settings/tokens/new?scopes=public_repo]] |<$password name="github"/> |
+|PR title: |<$edit-text tiddler="$:/temp/pr-title" default="" tag="input" class="tc-edit-texteditor" inputActions=<<inputActions>>/>|
+|PR message: |<$edit-text tiddler="$:/temp/pr-message" default="" tag="textarea" class="tc-edit-texteditor"/>|
+|Tiddlers to include: |//Use double square brackets around titles with spaces// <br><$edit-text tiddler="$:/temp/pr-tiddlers" default="" tag="textarea" class="tc-edit-texteditor"/><$list filter="[subfilter{$:/temp/pr-tiddlers}!is[tiddler]]">@@color:red;Tiddler titles are incorrect or tiddlers do not exist.@@</$list>|
+
+
+<$button
+	actions=<<makePRActions>>
+	disabled={{{ [{$:/temp/pr-title}] =[{$:/temp/pr-message}] [{$:/temp/pr-tiddlers}] +[!is[blank]count[]!match[3]then[yes]else[]!is[blank]] :else[subfilter{$:/temp/pr-tiddlers}!is[tiddler]then[yes]else[no]] }}}
+	>
+Make a PR
+</$button>
+
+<$list filter="[{$:/state/makepr/prlink}!is[blank]]">
+@@background-color:#D7BCE880;padding:1em;margin:1em;border-radius:0.5em;
+<$list filter="[[$:/state/makepr/prlink]has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
+<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/></a>
+</$list>
+@@
+</$list>

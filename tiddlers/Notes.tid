@@ -1,0 +1,16 @@
+created: 20211022232905241
+modified: 20211024082225361
+tags: 
+title: Notes
+
+* This is a copy of tiddlywiki.com. Edit some docs tiddlers and try to make a PR. 
+* The UI needs a fair bit of work but the basic necessities are there and the process works.
+* PRs are intentionally created against my fork for the moment to avoid spamming the main repo while testing
+** to make a PR against the main TiddlyWiki repository, change the contents of the tiddler [[$:/config/sq/makepr/repoOwner]] to `jermolene`
+* If the "Make a PR" button is disabled, make sure you have filled out the PR title and message
+
+
+---
+
+* better UI to add tiddlers to a PR
+** Drag and drop?

@@ -1,0 +1,14 @@
+{
+  "name": "twdocs-pr-maker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+      "build": "node ./node_modules/tiddlywiki/tiddlywiki.js . --build index"
+  },
+  "author": "",
+  "license": "BSD",
+  "dependencies": {
+    "tiddlywiki": "^5.2.0"
+  }
+}
