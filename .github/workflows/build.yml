@@ -22,6 +22,7 @@ jobs:
         run: npm install
       - name: Build
         run: |
+            mv -f ./node_modules/tiddlywiki/editions .
             npm run build
 
       - name: Deploy
