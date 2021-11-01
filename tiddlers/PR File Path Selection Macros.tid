@@ -1,0 +1,95 @@
+created: 20211027005404249
+modified: 20211029182952628
+tags: $:/tags/Macro
+title: PR File Path Selection Macros
+
+\define selectPRpath()
+<$select tiddler=<<selTiddler>> default="--pick-path--">
+<option value="">tiddlers (standard)</option>
+<$list filter="[<data>indexes[]] 
+:map[<data>getindex<currentTiddler>split[/]butlast[]join[/]]
++[!is[blank]unique[]sort[]]" >
+<option value=<<currentTiddler>>><<currentTiddler>></option>
+</$list>
+</$select>
+\end
+
+\define findNewPRTiddlers()
+<$vars data="$:/config/OriginalTiddlerPaths" pfx="../node_modules/tiddlywiki/editions/tw5.com/tiddlers/">
+<$list filter="[subfilter{$:/temp/pr-tiddlers}] :map[<data>getindex<currentTiddler>then[KILL-THIS-TIDDLER]else<currentTiddler>] +[unique[]] -[[KILL-THIS-TIDDLER]]  +[!is[blank]]" variable=newtid>
+<$vars selTiddler={{{ [[$:/temp/prpath-]addsuffix<newtid>]}}} >
+<tr><td><$text text=<<newtid>> /></td><td><<selectPRpath>></td></tr> 
+</$vars>
+</$list>
+</$vars>
+\end
+
+\define buttonPRaddPath()
+<$vars regexp='\^|<|>|/|~|:|\?|\\|\*|\"|\|' >
+<$vars goodName={{{ [<newtid>search-replace:g:regexp<regexp>,[_]]}}} 
+            jsonName={{{[<newtid>jsonstringify[]]}}}
+>
+<$list filter="[<selTiddler>get[text]trim[]!is[blank]]" variable="dummy">
+<$button class="tc-btn-invisible tc-tiddlylink">{{$:/core/images/plus-button}}
+<$action-setfield $tiddler=<<data>> $index=<<jsonName>> $value={{{ [<selTiddler>get[text]addsuffix[/]addsuffix<goodName>addsuffix[.tid]] }}} />
+</$button>
+</$list>
+</$vars></$vars>
+\end
+
+\define updateOTP()
+<$list filter="[subfilter<unPathedTiddlersFilter>]" variable="newtid">
+<$vars selTiddler={{{[[$:/temp/prpath-]addsuffix<newtid>]}}} 
+            regexp='\^|<|>|/|~|:|\?|\\|\*|\"|\|' 
+            data="$:/config/OriginalTiddlerPaths"
+>
+<$vars goodName={{{ [<newtid>search-replace:g:regexp<regexp>,[_]]}}} 
+            jsonName={{{[<newtid>jsonstringify[]]}}}
+>
+<$list filter="[<selTiddler>get[text]trim[]!is[blank]]" variable="dummy">
+<$action-setfield $tiddler=<<data>> $index=<<jsonName>> $value={{{ [<selTiddler>get[text]addsuffix[/]addsuffix<goodName>addsuffix[.tid]] }}} />
+</$list>
+</$vars></$vars>
+</$list>
+\end
+
+
+\define createPRpaths()
+<table style="border: none;">
+<<findNewPRTiddlers>>
+</table>
+\end
+
+\define arePathsOK(yes: "yes" no: "no" ) {{{[subfilter{$:/temp/pr-tiddlers}] :map[[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>then[KILL-THIS-TIDDLER]else<currentTiddler>] +[unique[]] -[[KILL-THIS-TIDDLER]]  +[!is[blank]limit[1]then<__no__>else<__yes__>]}}}
+
+\define unPathedTiddlersFilter() [subfilter{$:/temp/pr-tiddlers}] :map[[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>then[KILL-THIS-TIDDLER]else<currentTiddler>] +[unique[]] -[[KILL-THIS-TIDDLER]]
+
+\define unPathedTiddlers() {{{[subfilter<unPathedTiddlersFilter>]}}} 
+
+
+\define unPathedTiddlersx() {{{[subfilter{$:/temp/pr-tiddlers}] :map[[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>then[KILL-THIS-TIDDLER]else<currentTiddler>] +[unique[]] -[[KILL-THIS-TIDDLER]]}}}
+
+\define singleline(yes: "yes" no: "no") {{{[<__yes__>]}}}
+
+\define areAllNewTiddlersPathed(yes: "yes" no: "no") {{{[subfilter<unPathedTiddlersFilter>addprefix[$:/temp/prpath-]is[missing]!is[blank]limit[1]then<__no__>else<__yes__>]}}}
+
+\define test2() {{{[subfilter<unPathedTiddlersFilter>count[]]}}}
+
+
+<hr/>
+
+<<createPRpaths>>
+
+<<areAreNewTiddlersPathed>>
+
+Paths OK? <<arePathsOK>>
+
+Unpathed: <<unPathedTiddlers>>
+
+Test: <<test2>>
+
+<<xselectPRpath>>
+
+<$button>updateOTP
+<<updateOTP>>
+</$button>
