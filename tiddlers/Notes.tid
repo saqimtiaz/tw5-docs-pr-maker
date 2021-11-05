@@ -14,14 +14,12 @@ type: text/vnd.tiddlywiki
 ** If you are unsure what path to specify for new tiddlers, you can look at the path for existing "neighbor" tiddlers from the Table Of Contents.
 ** To see the file path of an existing tiddler click on  the down arrow at the top right of the tiddler, then click on the //info// button. Then on the //sources// tab. The path portion listed after `tw5.com.tiddlers/` is the physical path of that tiddler. 
 ** As a precaution, consider saving your work to your local hard drive, possibly using the [[fallback saver|https://tiddlywiki.com/#Saving%20with%20the%20HTML5%20fallback%20saver]] mechanism.
-* PRs are intentionally created against my fork for the moment to avoid spamming the main repo while testing.
-** To make a PR against the main TiddlyWiki repository, change the contents of the tiddler [[$:/config/sq/makepr/repoOwner]] to `jermolene`
+* PRs are intentionally created against a test repository by default to avoid spamming the main repo while testing.
+** To make a PR against the main TiddlyWiki repository, use the dropdown to select the "Target Repository"
 ** In order for your PR to be accepted at the main repository, you will need to [[sign the Contributor License Agreement|https://tiddlywiki.com/#Signing%20the%20Contributor%20License%20Agreement]]
 * If the "Make a PR" button is disabled, make sure you have filled out the PR title and message
 
 ---
 
-* Better UI to add tiddlers to a PR
-** Drag and drop?
 * File deletion/renaming.
 * Control of branch naming?

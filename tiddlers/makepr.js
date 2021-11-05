@@ -40,6 +40,7 @@ var makepr = function(files,slug) {
 	// Returns a normal Octokit PR response
 	// See https://octokit.github.io/rest.js/#octokit-routes-pulls-create
 	const REPO_OWNER = $tw.wiki.getTiddlerText("$:/config/sq/makepr/repoOwner","jermolene");
+	const PR_USER_BRANCH = $tw.wiki.getTiddlerText("$:/temp/pr-user-branch",slug).substring(0,20);
 	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `Creating PR...`}));
 	octokit.createPullRequest({
 		owner: REPO_OWNER,
@@ -47,7 +48,7 @@ var makepr = function(files,slug) {
 		title: $tw.wiki.getTiddlerText("$:/temp/pr-title"),
 		body: $tw.wiki.getTiddlerText("$:/temp/pr-message"),
 		base: REPO_BRANCH /* To Do: allow optionally specifying branch via UI */,
-		head: `${slug}-${Math.floor(Date.now() / 1000)}`,
+		head: `${PR_USER_BRANCH}-${Math.floor(Date.now() / 1000)}`,
 		changes: [
 			{
 			/* optional: if `files` is not passed, an empty commit is created instead */

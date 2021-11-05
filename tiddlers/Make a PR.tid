@@ -16,7 +16,15 @@ title: Make a PR
 />
 \end
 
+\define targetRepo()
+<$select tiddler="$:/config/sq/makepr/repoOwner" default="">
+<option value="jermolene">official TW repository</option>
+<option value="twlinks-ci-test">test repository</option>
+</$select>
+\end
+
 |tc-import-table tc-edit-field-value pr-table|k
+|Target repository |<<targetRepo>> |
 |[[Github Personal Access Token|https://github.com/settings/tokens/new?scopes=public_repo]] |<$password name="github"/> |
 |PR title: |<$edit-text tiddler="$:/temp/pr-title" default="" tag="input" class="tc-edit-texteditor" inputActions=<<inputActions>>/>|
 |PR message: |<$edit-text tiddler="$:/temp/pr-message" default="" tag="textarea" class="tc-edit-texteditor"/>|

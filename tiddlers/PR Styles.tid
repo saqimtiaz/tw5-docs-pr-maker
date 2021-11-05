@@ -5,4 +5,4 @@ title: PR Styles
 
 table.pr-table  tr:nth-child(5) { display: <<arePathsOK none table-row>>;}
 
-table.pr-table > tbody > tr > td:nth-child(1) { width: 8em;   }
+table.pr-table > tbody > tr > td:nth-child(1) { width: 16em;   }
