@@ -12,18 +12,26 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-18.04
-    steps:          
+    steps:
+      - name: Checkout PR maker   
       - uses: actions/checkout@v2
+        with:
+            path: pr-maker
       - uses: actions/setup-node@v2-beta
         with:
           node-version: '14'
 
-      - name: Install Dependency
-        run: npm install
+      - name: Checkout TW branch tiddlywiki-com
+      - uses: actions/checkout@v2
+        with:
+            repository: jermolene/TiddlyWiki5
+            ref: tiddlywiki-com
+            path: tiddlywiki
+
       - name: Build
         run: |
-            cp -fr ./node_modules/tiddlywiki/editions .
-            npm run build
+            cp -fr ./pr-maker/tiddlers ./tiddlywiki/editions/tw5.com/tiddlers
+            node tiddlywiki ./tiddlywiki/editions/tw5.com --output ./output --build index
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
