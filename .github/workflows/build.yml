@@ -14,21 +14,21 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout PR maker   
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
             path: pr-maker
-      - uses: actions/setup-node@v2-beta
-        with:
-          node-version: '14'
 
       - name: Checkout TW branch tiddlywiki-com
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
             repository: jermolene/TiddlyWiki5
             ref: tiddlywiki-com
             path: tiddlywiki
 
       - name: Build
+        uses: actions/setup-node@v2-beta
+        with:
+          node-version: '14'
         run: |
             cp -fr ./pr-maker/tiddlers ./tiddlywiki/editions/tw5.com/tiddlers
             node tiddlywiki ./tiddlywiki/editions/tw5.com --output ./output --build index
