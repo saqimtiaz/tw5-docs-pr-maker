@@ -25,10 +25,12 @@ jobs:
             ref: tiddlywiki-com
             path: tiddlywiki
 
-      - name: Build
+      - name: Setup node
         uses: actions/setup-node@v2-beta
         with:
           node-version: '14'
+        
+      - name: Build
         run: |
             cp -fr ./pr-maker/tiddlers ./tiddlywiki/editions/tw5.com/tiddlers
             node tiddlywiki ./tiddlywiki/editions/tw5.com --output ./output --build index
