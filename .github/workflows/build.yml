@@ -34,6 +34,7 @@ jobs:
         run: |
             cp -fr ./pr-maker/tiddlers ./tiddlywiki/editions/tw5.com/tiddlers
             node tiddlywiki ./tiddlywiki/editions/tw5.com --output ./output --build index
+            ls
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
