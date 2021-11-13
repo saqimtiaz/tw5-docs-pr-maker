@@ -1,8 +1,35 @@
-created: 20211028224033142
-modified: 20211029164622789
 tags: $:/tags/Stylesheet
-title: PR Styles
+title: $:/plugins/sq/makepr/styles
 
-table.pr-table  tr:nth-child(6) { display: <<arePathsOK none table-row>>;}
+table.pr-table  tr:nth-child(6) {
+	display: <<arePathsOK none table-row>>;
+}
 
-table.pr-table > tbody > tr > td:nth-child(1) { width: 16em;   }
+table.pr-table > tbody > tr > td:nth-child(1) {
+	width: 16em;
+}
+
+.pr-tiddlers {
+	background: <<color code-background>>;
+	padding: 1em;
+}
+
+.pr-listmode-btn {
+	float: right;
+}
+
+.pr-tiddlers .tc-droppable > .pr-list-placeholder {
+	display: block;
+	padding: 1em;
+}
+
+
+/*
+
+strike through for icons
+
+background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3e%3cline x1='0' y1='100' x2='100' y2='0' stroke-width='8' stroke='%230B2437'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+	
+	
+*/

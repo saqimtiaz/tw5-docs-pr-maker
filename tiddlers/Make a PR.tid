@@ -1,6 +1,3 @@
-created: 20211022225251013
-modified: 20211029173439544
-tags: 
 title: Make a PR
 
 \define inputActions()
@@ -23,12 +20,19 @@ title: Make a PR
 </$select>
 \end
 
+Automatically add new and modified tiddlers to the PR: <$select tiddler="$:/config/sq/makepr/autotrack" default='yes'>
+<option value="yes">yes</option>
+<option value="no">no</option>
+</$select>
+
+
+
 |tc-import-table tc-edit-field-value pr-table|k
 |Target repository |<<targetRepo>> |
 |[[Github Personal Access Token|https://github.com/settings/tokens/new?scopes=public_repo]] |<$password name="github"/> |
 |PR title: |<$edit-text tiddler="$:/temp/pr-title" default="" tag="input" class="tc-edit-texteditor" inputActions=<<inputActions>>/>|
 |PR message: |<$edit-text tiddler="$:/temp/pr-message" default="" tag="textarea" class="tc-edit-texteditor"/>|
-|Tiddlers to include: |//Use double square brackets around titles with spaces// <br><$edit-text tiddler="$:/temp/pr-tiddlers" default="" tag="textarea" class="tc-edit-texteditor"/><div style="width: 80%"><$list filter="[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]]">@@color:red;Some specified tiddlers do not exist. @@</$list><$wikify text="<<arePathsOK>>" name="pathsOK" ><$list filter="[<pathsOK>match[no]]">@@color:red;Specify file paths for new tiddlers below.@@</$list></$wikify></div>|
+|Tiddlers to include: |{{$:/plugins/sq/makepr/pr-tiddler-list}}<div style="width: 80%"><$list filter="[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]]">@@color:red;Some specified tiddlers do not exist. @@</$list><$wikify text="<<arePathsOK>>" name="pathsOK" ><$list filter="[<pathsOK>match[no]]">@@color:red;Specify file paths for new tiddlers below.@@</$list></$wikify></div>|
 |Specify file paths for any new tiddlers here: |^//Select path for each new tiddler.// <<createPRpaths>>  |
 
 <$wikify text="<<areAllNewTiddlersPathed>>" name="allNewTiddlersPathed" >
