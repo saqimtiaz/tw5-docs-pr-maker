@@ -80,7 +80,7 @@ exports.startup = function() {
 				var tiddler = $tw.wiki.getTiddler(title);
 				if(tiddler) {
 					var path = getTiddlerPath(title),
-						wikifyParser = $tw.wiki.parseText(tiddler.fields.type || "text/vnd.tiddlywiki",$tw.wiki.getTiddlerText("$:/core/templates/tid-tiddler"),{
+						wikifyParser = $tw.wiki.parseText("text/vnd.tiddlywiki",$tw.wiki.getTiddlerText("$:/core/templates/tid-tiddler"),{
 							parseAsInline: false
 						}),
 						wikifyWidgetNode = $tw.wiki.makeWidget(wikifyParser,{
