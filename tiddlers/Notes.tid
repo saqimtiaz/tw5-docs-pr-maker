@@ -4,22 +4,49 @@ tags:
 title: Notes
 type: text/vnd.tiddlywiki
 
-* The UI here is simple but it has the basic necessities and the process works.
-* In order to create a PR (Pull Request) you will need
-** An account at //~GitHub//
-** [[A GitHub personal access token|https://github.com/settings/tokens/new?scopes=public_repo]]
-* This //~TiddlyWiki// file contains a copy of tiddlywiki.com. You can edit tiddlers and create tiddlers and then submit them via the supplied [[form|Make a PR]] . 
-** You can drag and drop tiddlers from under the `Open` or `Recent` sidebar tabs into the `Tiddlers to include` box on the form.
-** New tiddlers will need to have a physical path specified from the path select box. The box only appears if there are brand new tiddlers to be specified
-** If you are unsure what path to specify for new tiddlers, you can look at the path for existing "neighbor" tiddlers from the Table Of Contents.
-** To see the file path of an existing tiddler click on  the down arrow at the top right of the tiddler, then click on the //info// button. Then on the //sources// tab. The path portion listed after `tw5.com.tiddlers/` is the physical path of that tiddler. 
-** As a precaution, consider saving your work to your local hard drive, possibly using the [[fallback saver|https://tiddlywiki.com/#Saving%20with%20the%20HTML5%20fallback%20saver]] mechanism.
+The UI in the [[Contribution Form|Make a PR]] here is simple but it has the basic necessities and the process works.
+
+!! Preparations
+
+* You will need an account at [ext[https://GitHub.com]]
+* You need to [[sign the Contributor License Agreement (CLA)|https://tiddlywiki.com/#Signing%20the%20Contributor%20License%20Agreement]]
+* You need [[a GitHub personal access token|https://github.com/settings/tokens/new?scopes=public_repo]], so this wiki is allowed to create a pull request from your browser
+
+!! Prepare you changes
+
+This //~TiddlyWiki// file contains a copy of tiddlywiki.com. You can edit and create tiddlers to submit them via the [[contribution form|Make a PR]].
+
+* You can drag and drop tiddlers from under the `Open` or `Recent` sidebar tabs into the `Tiddlers to include` box on the form.
+
+* New tiddlers will need to have a physical path specified from the path select box.<br/>The box only appears if there are brand new tiddlers to be specified
+
+* If you are unsure what path to specify for new tiddlers, you can look at the path for existing "neighbor" tiddlers from the Table Of Contents.
+
+* To see the file path of an existing tiddler click on  the down arrow at the top right of the tiddler.
+** Then click on the //info// button. 
+** Select the //sources// tab.
+** The path portion listed after `tw5.com.tiddlers/` is the physical path of that tiddler.
+
+!! Backup your changes
+
+Having a backup, will make it easy to create a new PR, if the first one needs some changes
+
+* You can use the export preview button @@.pr-inline-button {{$:/core/images/export-button}}@@ to list all edited tiddlers and the form configuration in ~$:/AdvancedSearch
+* From there you can export / backup all of them as a JSON file
+
+!! Create a pull request (PR)
+
 * PRs are intentionally created against a test repository by default to avoid spamming the main repo while testing.
-** To make a PR against the main TiddlyWiki repository, use the dropdown to select the "Target Repository"
-** In order for your PR to be accepted at the main repository, you will need to [[sign the Contributor License Agreement|https://tiddlywiki.com/#Signing%20the%20Contributor%20License%20Agreement]]
+
+* To make a PR against the main ~TiddlyWiki repository, use the "Target Repository" dropdown and select the "Official TW Repository"
+
+* In order for your PR to be accepted at the main repository, you will need to sign the Contributor License Agreement (CLA). See Preparations
+
 * If the "Make a PR" button is disabled, make sure you have filled out the PR title and message
 
 ---
+
+''TODO''
 
 * File deletion/renaming.
 * Control of branch naming?

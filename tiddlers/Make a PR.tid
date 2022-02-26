@@ -15,17 +15,19 @@ title: Make a PR
 
 \define targetRepo()
 <$select tiddler="$:/config/sq/makepr/repoOwner" default="">
-<option value="jermolene">official TW repository</option>
-<option value="twlinks-ci-test">test repository</option>
+<option value="jermolene">Official TW Repository</option>
+<option value="twlinks-ci-test">Test Repository</option>
 </$select>
 \end
+
+For more info about this form read the [[Notes]]
+
+---
 
 Automatically add new and modified tiddlers to the PR: <$select tiddler="$:/config/sq/makepr/autotrack" default='yes'>
 <option value="yes">yes</option>
 <option value="no">no</option>
 </$select>
-
-
 
 |tc-import-table tc-edit-field-value pr-table|k
 |Target repository |<<targetRepo>> |

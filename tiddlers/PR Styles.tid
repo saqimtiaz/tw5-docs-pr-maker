@@ -16,6 +16,7 @@ table.pr-table > tbody > tr > td:nth-child(1) {
 
 .pr-listmode-btn {
 	float: right;
+	padding-left: .5em;
 }
 
 .pr-tiddlers .tc-droppable > .pr-list-placeholder {
@@ -23,13 +24,15 @@ table.pr-table > tbody > tr > td:nth-child(1) {
 	padding: 1em;
 }
 
+.pr-inline-button {
+  width: 1.2em; 
+  vertical-align:-1ex; 
+  display:inline-block; 
+}
 
 /*
-
 strike through for icons
 
 background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3e%3cline x1='0' y1='100' x2='100' y2='0' stroke-width='8' stroke='%230B2437'/%3e%3c/svg%3e");
     background-size: 100% 100%;
-	
-	
 */
