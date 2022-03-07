@@ -98,9 +98,9 @@ exports.startup = function() {
 			console.log(files);
 			if(!$tw.Octokit) {
  			  	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `loading Octokit library`}));
-				import("https://cdn.pika.dev/@octokit/core").then((module)=>{
+				import("https://cdn.skypack.dev/@octokit/core").then((module)=>{
 					$tw.Octokit = module.Octokit;
-					return import("https://cdn.pika.dev/octokit-plugin-create-pull-request");
+					return import("https://cdn.skypack.dev/octokit-plugin-create-pull-request");
 				}).then((module)=>{
 					$tw.createPullRequest = module.createPullRequest;
 					makepr(files,slug);
