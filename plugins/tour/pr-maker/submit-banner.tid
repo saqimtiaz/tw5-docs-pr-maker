@@ -1,8 +1,6 @@
 title: $:/submit-banner
 tags: $:/tags/PageTemplate
 
-<$list filter="[{$:/config/ShowTour}match[hide]] :else[{$:/state/tour/step}match[$:/contribute-docs/tour/steps/contribute-button]]" variable="ignore">
 <div class="submit-docs-banner">
 <$button tag="a" class="submit-button" to="Submit documentation updates">Submit updates</$button>
 </div>
-</$list>

@@ -41,7 +41,7 @@ var makepr = function(files,slug) {
 	// See https://octokit.github.io/rest.js/#octokit-routes-pulls-create
 	const REPO_OWNER = $tw.wiki.getTiddlerText("$:/config/sq/makepr/repoOwner","jermolene");
 	const PR_USER_BRANCH = $tw.wiki.getTiddlerText("$:/temp/pr-user-branch",slug).substring(0,20);
-	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `Creating PR...`}));
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `Creating submission...`}));
 	octokit.createPullRequest({
 		owner: REPO_OWNER,
 		repo: REPO,
