@@ -56,6 +56,14 @@ Submit documentation update
 <div class="submission-status">
 <$list filter="[[$:/state/makepr/prlink]has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
 <a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/></a>
+<$list filter="[<currentTiddler>get[text]prefix[Submission request created]]">
+<$confetti/>
+<$confetti delay=100/>
+<$confetti delay=200/>
+<$confetti delay=300/>
+<$confetti delay=400/>
+<$confetti delay=500/>
+</$list>
 </$list>
 </div>
 </$list>
