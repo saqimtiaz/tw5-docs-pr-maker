@@ -94,3 +94,10 @@ tags: $:/tags/Stylesheet
 	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
 }
+
+.submission-status {
+	background-color:#D7BCE880;
+	padding:1em;
+	margin:1em;
+	border-radius:0.5em;
+}

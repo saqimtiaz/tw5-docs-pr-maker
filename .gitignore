@@ -1,3 +1,5 @@
 node_modules
 output
 tiddlers/$__StoryList.tid
+tiddlers/$__config_SyncFilter.tid
+tiddlers/$__config_ShowTour.tid

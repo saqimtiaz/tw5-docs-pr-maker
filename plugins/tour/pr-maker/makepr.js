@@ -97,7 +97,7 @@ exports.startup = function() {
 			});
 			console.log(files);
 			if(!$tw.Octokit) {
- 			  	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `loading Octokit library`}));
+ 			  	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `loading external library`}));
 				import("https://esm.sh/@octokit/core@5.0.0").then((module)=>{
 					$tw.Octokit = module.Octokit;
 					return import("https://esm.sh/octokit-plugin-create-pull-request@5.1.0");

@@ -51,13 +51,12 @@ type: text/vnd.tiddlywiki
 Submit documentation update
 </$button>
 
-<div class="submission-status">
+
 <$list filter="[{$:/state/makepr/prlink}!is[blank]]">
-@@background-color:#D7BCE880;padding:1em;margin:1em;border-radius:0.5em;
+<div class="submission-status">
 <$list filter="[[$:/state/makepr/prlink]has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
 <a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/></a>
 </$list>
-@@
-</$list>
 </div>
+</$list>
 </div>
