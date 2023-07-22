@@ -1,4 +1,7 @@
-title: Make a PR
+created: 20230722171650945
+modified: 20230722200213069
+title: Submit documentation updates - advanced
+type: text/vnd.tiddlywiki
 
 \define inputActions()
 <$action-deletetiddler $tiddler="$:/state/makepr/prlink"/>
@@ -20,18 +23,14 @@ title: Make a PR
 </$select>
 \end
 
-For more info about this form read the [[Notes]]
-
----
-
-Automatically add new and modified tiddlers to the PR: <$select tiddler="$:/config/sq/makepr/autotrack" default='yes'>
+Automatically add new and modified tiddlers to the submission: <$select tiddler="$:/config/sq/makepr/autotrack" default='yes'>
 <option value="yes">yes</option>
 <option value="no">no</option>
 </$select>
 
 |tc-import-table tc-edit-field-value pr-table|k
 |Target repository |<<targetRepo>> |
-|[[Github Personal Access Token|https://github.com/settings/tokens/new?scopes=public_repo]] |<$password name="github"/> |
+|[[Github Personal Access Token|https://github.com/settings/tokens/new?scopes=public_repo]] |<$password name="github-docs-pr"/> |
 |PR title: |<$edit-text tiddler="$:/temp/pr-title" default="" tag="input" class="tc-edit-texteditor" inputActions=<<inputActions>>/>|
 |PR message: |<$edit-text tiddler="$:/temp/pr-message" default="" tag="textarea" class="tc-edit-texteditor"/>|
 |Tiddlers to include: |{{$:/plugins/sq/makepr/pr-tiddler-list}}<div style="width: 80%"><$list filter="[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]]">@@color:red;Some specified tiddlers do not exist. @@</$list><$wikify text="<<arePathsOK>>" name="pathsOK" ><$list filter="[<pathsOK>match[no]]">@@color:red;Specify file paths for new tiddlers below.@@</$list></$wikify></div>|
@@ -42,7 +41,7 @@ Automatically add new and modified tiddlers to the PR: <$select tiddler="$:/conf
 	actions=<<makePRActions>> 
 	disabled={{{ [{$:/temp/pr-title}] =[{$:/temp/pr-message}] [{$:/temp/pr-tiddlers}] +[!is[blank]count[]!match[3]then[yes]else[]!is[blank]]  :else[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]then[yes]else[]!is[blank]] :else[<allNewTiddlersPathed>match[no]then[yes]else[no]] }}}
 	>
-Make a PR
+Submit documentation update
 </$button>
 </$wikify>
 

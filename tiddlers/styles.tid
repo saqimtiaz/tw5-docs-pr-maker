@@ -1,0 +1,96 @@
+title: $:/styles
+tags: $:/tags/Stylesheet
+
+.submit-docs-banner {
+	position: fixed;
+	right: 1em;
+	bottom: 1em;
+	z-index: 2000;
+}
+
+.submit-button {
+	box-shadow: 3px 4px 0px 0px #8a2a21;
+	background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
+	background-color:#c62d1f;
+	border-radius:18px;
+	border:1px solid #d02718;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	padding:12px 45px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #810e05;
+}
+.submit-button:hover {
+	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
+	background-color:#f24437;
+}
+.submit-button:active {
+	position:relative;
+	top:1px;
+}
+
+
+.submission-form .form-group {
+	margin-bottom: 1rem;
+	padding: 1.5rem;
+	margin-right: 0;
+	margin-left: 0;
+	border-width: 0.2rem;
+	border: solid #f7f7f9;
+}
+
+.submission-form h2 {
+	margin-top: 0.2em;
+}
+
+.submission-form .form-group :is(input,textarea) {
+	display: block;
+	width: 100%;
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: 0.25rem;
+	transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.submission-form .form-group :is(input,textarea):focus {
+	color: #495057;
+	background-color: #fff;
+	border-color: #80bdff;
+	outline: 0;
+	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.submission-form button.submit {
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: 0.25rem;
+}
+
+.submission-form button.submit:not(:disabled):hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.submission-form button.submit:not(:disabled) {
+	cursor: pointer;
+	color: #fff;
+	background-color: #007bff;
+	border: 1px solid transparent;
+	border-color: #007bff;
+	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+
+}

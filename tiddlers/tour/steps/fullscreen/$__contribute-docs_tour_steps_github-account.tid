@@ -1,0 +1,17 @@
+created: 20230722143606139
+display-mode: fullscreen
+modified: 20230722143813339
+startup-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter $:/plugins/tiddlywiki/tour/steps/tiddlers/Saturn"/>
+tags: $:/tags/TourStep
+title: $:/contribute-docs/tour/steps/github-account
+type: text/vnd.tiddlywiki
+
+\define tour-simplified-tiddler-close-button() yes
+
+! ~GitHub account
+
+In order for your contributions to be submitted to the ~TiddlyWiki project, you will need a [[GitHub|https://github.com/]] account.
+
+If you do not have an account, please create one before continuing. 
+
+<<tour-buttons>>

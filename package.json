@@ -9,6 +9,6 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "tiddlywiki": "^5.2.0"
+    "tiddlywiki": "^5.3.0"
   }
 }

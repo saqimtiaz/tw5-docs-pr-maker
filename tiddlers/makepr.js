@@ -28,7 +28,7 @@ var getTiddlerPath = function(title) {
 
 var makepr = function(files,slug) {
 	const MyOctokit = $tw.Octokit.plugin($tw.createPullRequest);
-	const TOKEN = $tw.utils.getPassword("github");
+	const TOKEN = $tw.utils.getPassword("github-docs-pr");
 	if(!TOKEN || !TOKEN.length) {
 		alert("please set the github personal access token");
 		return;
@@ -61,9 +61,9 @@ var makepr = function(files,slug) {
 	})
 	.then((pr) => {
 	 	console.log(pr.data.number);
-		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text:"PR created", link: `https://github.com/${REPO_OWNER}/${REPO}/pull/${pr.data.number}`}));
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text:"Submission request created", link: `https://github.com/${REPO_OWNER}/${REPO}/pull/${pr.data.number}`}));
 	}).catch((err)=>{
-		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `There was an error in creating the PR. ${err}`}));		  
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `There was an error in submitting the updates. ${err}`}));		  
 	});
 }
 
@@ -98,14 +98,14 @@ exports.startup = function() {
 			console.log(files);
 			if(!$tw.Octokit) {
  			  	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `loading Octokit library`}));
-				import("https://cdn.skypack.dev/@octokit/core").then((module)=>{
+				import("https://esm.sh/@octokit/core@5.0.0").then((module)=>{
 					$tw.Octokit = module.Octokit;
-					return import("https://cdn.skypack.dev/octokit-plugin-create-pull-request");
+					return import("https://esm.sh/octokit-plugin-create-pull-request@5.1.0");
 				}).then((module)=>{
 					$tw.createPullRequest = module.createPullRequest;
 					makepr(files,slug);
 				}).catch((err)=>{
-					$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `There was an error in creating the PR. ${err}`}));
+					$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `There was an error in submitting the update. ${err}`}));
 				});
 			} else {
 				makepr(files,slug);

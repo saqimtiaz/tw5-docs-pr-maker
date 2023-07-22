@@ -1,0 +1,5 @@
+title: $:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step
+
+<$let currentStep={{{ [{$:/state/tour/step}!is[blank]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]] }}}>
+<$transclude $tiddler=<<currentStep>> $field="startup-actions"/>
+</$let>

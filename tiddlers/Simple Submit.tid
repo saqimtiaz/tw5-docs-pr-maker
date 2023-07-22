@@ -1,0 +1,59 @@
+created: 20230722182032523
+modified: 20230722184417535
+tags: 
+title: Simple Submit
+type: text/vnd.tiddlywiki
+
+\define inputActions()
+<$action-deletetiddler $tiddler="$:/state/makepr/prlink"/>
+\end
+
+\define makePRActions()
+<<updateOTP>>
+<$action-sendmessage
+	$message="tm-makepr"
+	$param={{$:/temp/pr-tiddlers}}
+	slug={{{ [{$:/temp/pr-title}slugify[]] }}}
+/>
+\end
+
+<div class="submission-form">
+
+<fieldset>
+<legend>Review tiddlers to be submitted:</legend>
+{{$:/plugins/sq/makepr/pr-tiddler-list}}<div style="width: 80%"><$list filter="[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]]">@@color:red;Some specified tiddlers do not exist. @@</$list></div>
+</fieldset>
+
+<fieldset>
+<legend>Provide a title and description for your changes:</legend>
+Title:
+<$edit-text tiddler="$:/temp/pr-title" default="" tag="input" class="tc-edit-texteditor" inputActions=<<inputActions>>/>
+Description:
+<$edit-text tiddler="$:/temp/pr-message" default="" tag="textarea" class="tc-edit-texteditor"/>
+</fieldset>
+
+<$list filter="[password-exists[github-docs-pr]match[no]]">
+<fieldset class="error-missing-token">
+<legend>Github authentication token:</legend>
+<$password name="github-docs-pr"/>
+</fieldset>
+</$list>
+
+<$button
+	actions=<<makePRActions>> 
+	disabled={{{ [{$:/temp/pr-title}] =[{$:/temp/pr-message}] [{$:/temp/pr-tiddlers}] +[!is[blank]count[]!match[3]then[yes]else[]!is[blank]]  :else[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]then[yes]else[]!is[blank]]  }}}
+	>
+Submit documentation update
+</$button>
+
+<div class="submission-status">
+<$list filter="[{$:/state/makepr/prlink}!is[blank]]">
+@@background-color:#D7BCE880;padding:1em;margin:1em;border-radius:0.5em;
+<$list filter="[[$:/state/makepr/prlink]has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
+<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/></a>
+</$list>
+@@
+</$list>
+</div>
+
+</div>

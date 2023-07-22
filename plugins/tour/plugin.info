@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/tw/tour",
+	"name": "Tour (customized)",
+	"description": "A tour of TiddlyWiki",
+	"list": "readme",
+	"dependents": ["$:/plugins/tiddlywiki/confetti","$:/plugins/tiddlywiki/dynannotate"]
+}

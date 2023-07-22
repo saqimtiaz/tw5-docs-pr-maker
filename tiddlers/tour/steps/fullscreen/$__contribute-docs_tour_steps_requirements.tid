@@ -1,0 +1,16 @@
+created: 20230722143439396
+display-mode: fullscreen
+modified: 20230722143829142
+startup-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter"/>
+tags: $:/tags/TourStep
+title: $:/contribute-docs/tour/steps/requirements
+type: text/vnd.tiddlywiki
+
+! Requirements
+
+In order for your contributions to be submitted on your behalf, you will need:
+
+* a [[GitHub|https://github.com/]] account
+* a ~GitHub access token: you will be guided in creating one
+
+<<tour-buttons>>

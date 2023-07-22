@@ -1,0 +1,13 @@
+created: 20230722153011053
+hint: where is the submission form button?
+modified: 20230722163554068
+selector: .submit-docs-banner a
+tags: $:/tags/TourStep
+title: $:/contribute-docs/tour/steps/contribute-button
+type: text/vnd.tiddlywiki
+
+! Edit and create tiddlers to update the documentation
+
+Once you are ready to submit your work, open the submission form using the button in the bottom right corner.
+
+In this form you can review which tiddlers will be submitted, and provide a short description of your changes.

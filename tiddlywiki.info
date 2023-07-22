@@ -1,6 +1,9 @@
 {
     "description": "Empty edition",
-    "plugins": [],
+    "plugins": [
+		"tiddlywiki/tiddlyweb",
+		"tiddlywiki/filesystem"
+    ],
     "themes": [
         "tiddlywiki/vanilla",
         "tiddlywiki/snowwhite"
@@ -28,5 +31,8 @@
             "--rendertiddlers", "[!is[system]]", "$:/core/templates/static.tiddler.html", "static", "text/plain",
             "--rendertiddler", "$:/core/templates/static.template.css", "static/static.css", "text/plain"
         ]
-    }
+    },
+    "config": {
+		"retain-original-tiddler-path": true	
+	}
 }

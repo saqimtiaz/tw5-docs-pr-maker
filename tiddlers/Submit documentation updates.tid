@@ -1,0 +1,63 @@
+title: Submit documentation updates
+type: text/vnd.tiddlywiki
+
+\define inputActions()
+<$action-deletetiddler $tiddler="$:/state/makepr/prlink"/>
+\end
+
+\define makePRActions()
+<<updateOTP>>
+<$action-sendmessage
+	$message="tm-makepr"
+	$param={{$:/temp/pr-tiddlers}}
+	slug={{{ [{$:/temp/pr-title}slugify[]] }}}
+/>
+\end
+
+\define bluractions()
+<$action-setfield $tiddler="$:/temp/refresh-token-status" text="yes"/>
+\end
+
+<div class="submission-form">
+<div class="form-group">
+<h2>Review tiddlers to be submitted:</h2>
+{{$:/plugins/sq/makepr/pr-tiddler-list}}<div style="width: 80%"><$list filter="[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]]">@@color:red;Some specified tiddlers do not exist. @@</$list></div>
+</div>
+
+<div class="form-group">
+<h2>Provide a title and description for your changes:</h2>
+<label>Title:
+<$edit-text tiddler="$:/temp/pr-title" default="" tag="input" class="tc-edit-texteditor" inputActions=<<inputActions>>/></label>
+<label>Description:
+<$edit-text tiddler="$:/temp/pr-message" default="" tag="textarea" class="tc-edit-texteditor"/></label>
+</div>
+
+<$let null={{$:/temp/refresh-token-status}}>
+<$list filter="[password-exists[github-docs-pr]match[no]]">
+<div class="form-group error-missing-token">
+<h2>Provide a ~GitHub authentication token:</h2>
+<$eventcatcher $focusout=<<bluractions>> selector="input" tag="span">
+<$password name="github-docs-pr"/>
+</$eventcatcher>
+</div>
+</$list>
+</$let>
+
+<$button
+	actions=<<makePRActions>> 
+	disabled={{{ [{$:/temp/pr-title}] =[{$:/temp/pr-message}] [{$:/temp/pr-tiddlers}] +[!is[blank]count[]!match[3]then[yes]else[]!is[blank]]  :else[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]then[yes]else[]!is[blank]]  }}}
+	class="submit"
+	>
+Submit documentation update
+</$button>
+
+<div class="submission-status">
+<$list filter="[{$:/state/makepr/prlink}!is[blank]]">
+@@background-color:#D7BCE880;padding:1em;margin:1em;border-radius:0.5em;
+<$list filter="[[$:/state/makepr/prlink]has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
+<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/></a>
+</$list>
+@@
+</$list>
+</div>
+</div>

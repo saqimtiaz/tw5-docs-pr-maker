@@ -33,6 +33,7 @@ jobs:
       - name: Build
         run: |
             cp -fr ./pr-maker/tiddlers ./tiddlywiki/editions/tw5.com/tiddlers
+            cp -fr ./pr-maker/plugins ./tiddlywiki/editions/tw5.com/plugins
             node tiddlywiki/tiddlywiki ./tiddlywiki/editions/tw5.com --output ./output --build index
             ls
 
