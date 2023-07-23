@@ -21,6 +21,7 @@ type: text/vnd.tiddlywiki
 <div class="submission-form">
 <div class="form-group">
 <h2>Review tiddlers to be submitted:</h2>
+<p>//(any tiddlers you modify or create are automatically added here)//</p>
 {{$:/plugins/sq/makepr/pr-tiddler-list}}<div style="width: 80%"><$list filter="[subfilter{$:/temp/pr-tiddlers}!is[tiddler]limit[1]]">@@color:red;Some specified tiddlers do not exist. @@</$list></div>
 </div>
 

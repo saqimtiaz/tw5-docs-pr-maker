@@ -7,11 +7,11 @@ type: text/vnd.tiddlywiki
 
 ! Access token
 
-* A GitHub access token allows contributions to be made on your behalf. 
+* A ~GitHub access token allows contributions to be made on your behalf. 
 * The access token you provide will be saved in your browser.
 * The same access token will be reused for future contributions until it expires.
 
-The link below will open the ~GitHub page for creating an access token with the minimum required permissions already selected. Please add a note to remind you what the access token is for, and create the token and copy it.
+The link below will open the ~GitHub page for creating an access token with the minimum required permissions already selected. Add a note to remind yourself what the access token is for, and create the token and copy it.
 
 [[Create an access token|https://github.com/settings/tokens/new?scopes=public_repo]]
 

@@ -34,6 +34,7 @@ tags: $:/tags/Stylesheet
 	border: none;
 	background: <<colour page-background>>;
 	margin: 0;
+	width: 100%;
 }
 
 .tc-tour-panel-fullscreen .tc-tour-panel-controls {
@@ -53,7 +54,7 @@ tags: $:/tags/Stylesheet
 
 .tc-tour-panel-fullscreen .tc-tour-panel-inner {
 	width: 30%;
-	min-width: 400px;
+	min-width: 320px;
 	height: 30%;
 	margin: 20% auto;
 	font-size: 1.2em;
