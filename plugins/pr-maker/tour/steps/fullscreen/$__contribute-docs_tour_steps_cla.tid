@@ -25,9 +25,9 @@ $(signature)$`/>
 
 It looks like this is the first time you are contributing to ~TiddlyWiki5. Welcome! 
 
-Like other OpenSource projects, TiddlyWiki5 needs a signed contributor license agreement (CLA) from individual contributors.
+Like other ~OpenSource projects, ~TiddlyWiki5 needs a signed contributor license agreement (CLA) from individual contributors.
 
-This is a legal agreement that allows contributors to assert that they own the copyright of their contribution, and that they agree to license it to the UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
+This is a legal agreement that allows contributors to assert that they own the copyright of their contribution, and that they agree to license it to the ~UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
 
 Please [[read the CLA|https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-com/licenses/cla-individual.md]] and confirm below that you wish to sign it. You only have to do this once!
 
