@@ -37,6 +37,11 @@ tags: $:/tags/PageTemplate
 				<div class="tc-tiddler-controls tc-tour-panel-controls">
 					<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> ''Tour''
 				</div>
+				<$list filter="[<displayMode>match[fullscreen]]">
+					<div style="text-align:right;font-size:1.5em;">
+						<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible" tooltip="exit tour"><span style="fill:#bbb;">{{$:/core/images/close-button}}</span></$button>
+					</div>
+				</$list>
 				<$transclude tiddler=<<currentStep>> mode="block"/>
 				<$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">
 					<$button class="tc-btn-big-green" style="background-color: green;">
@@ -44,10 +49,7 @@ tags: $:/tags/PageTemplate
 						<$transclude tiddler={{$:/state/tour/step}} field="hint" mode="inline"> show me a hint </$transclude>
 					</$button>
 				</$list>
-					<$list filter="[<displayMode>match[fullscreen]]">
-						<div style="text-align:center;font-size:1.5em;"><$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible" tooltip="exit tour">{{$:/core/images/close-button}}</$button></div>
-					</$list>
-				</div>
+			</div>
 		</div>
 	</$let>
 </$list>

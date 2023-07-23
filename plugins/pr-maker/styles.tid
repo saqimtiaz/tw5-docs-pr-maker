@@ -102,3 +102,9 @@ tags: $:/tags/Stylesheet
 	margin:1em;
 	border-radius:0.5em;
 }
+
+/*
+.tc-tour-panel-navigation {
+	text-align: center;
+}
+*/

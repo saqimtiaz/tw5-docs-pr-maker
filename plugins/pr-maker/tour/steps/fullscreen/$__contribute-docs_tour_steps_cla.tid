@@ -7,7 +7,7 @@ condition: [{$:/temp/contribute/cla}!is[blank]] :then[{$:/temp/contribute/gituse
 \procedure cla-state() $:/temp/state/sign-cla
 \procedure sign-cla()
 <$let
-    cla-tiddler=
+    cla-tiddler="$:/temp/contribute/cla"
     original={{{ [<cla-tiddler>get[text]] }}}
     signature=`@${ [{$:/temp/contribute/gitusername}] }$, ${ [<now YYYY-0MM-0DD>] }$`
 >
@@ -38,7 +38,8 @@ Please [[read the CLA|https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-c
 <$list filter="[<cla-state>] :filter[get[text]!is[blank]]">
 <div class="submission-status">
 <$list filter="[<cla-state>has[link]]" emptyMessage="""<$text text={{!!text}}/>""">
-<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/></a>
+<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$transclude/></a>
+<p>You many continue</p>
 </$list>
 </div>
 </$list>
