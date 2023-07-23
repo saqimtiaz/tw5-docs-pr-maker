@@ -14,4 +14,8 @@ In order for your contributions to be submitted to the ~TiddlyWiki project, you 
 
 If you do not have an account, please create one before continuing. 
 
+Please enter your ~GitHub username:
+
+<$edit-text tiddler="$:/temp/contribute/gitusername" class="tc-edit-texteditor" tag="input"/>
+
 <<tour-buttons>>

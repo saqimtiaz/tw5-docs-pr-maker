@@ -1,9 +1,7 @@
-created: 20230722144419763
 display-mode: fullscreen
-modified: 20230722145959618
 tags: $:/tags/TourStep
 title: $:/contribute-docs/tour/steps/access-token
-type: text/vnd.tiddlywiki
+condition: [password-exists[github-docs-pr]match[no]]
 
 ! Access token
 

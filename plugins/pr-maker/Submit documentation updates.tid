@@ -11,6 +11,7 @@ type: text/vnd.tiddlywiki
 	$message="tm-makepr"
 	$param={{$:/temp/pr-tiddlers}}
 	slug={{{ [{$:/temp/pr-title}slugify[]] }}}
+	state="$:/state/makepr/prlink"
 />
 \end
 

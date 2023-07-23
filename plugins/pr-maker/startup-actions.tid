@@ -1,0 +1,20 @@
+title: $:/contribute/startup-actions/cla
+tags: $:/tags/StartupAction/PostRender
+
+\procedure get-cla()
+
+\procedure completion()
+<$action-log hello="hello"/>
+    <$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
+        <$action-setfield $tiddler="$:/temp/contribute/cla" text=<<data>>/>
+    </$list>
+\end completion
+
+<$action-sendmessage
+	$message="tm-http-request"
+	url="https://raw.githubusercontent.com/Jermolene/TiddlyWiki5/tiddlywiki-com/licenses/cla-individual.md"
+	method="GET"
+	oncompletion=<<completion>>
+/>
+\end get-cla
+<<get-cla>>

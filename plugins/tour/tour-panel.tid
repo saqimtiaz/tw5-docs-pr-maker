@@ -1,48 +1,53 @@
 title: $:/plugins/tiddlywiki/tour/panel
 tags: $:/tags/PageTemplate
 
-\define tour-buttons()
-\define tv-action-refresh-policy() always
+\procedure tour-buttons()
+\procedure tv-action-refresh-policy() always
 <div class="tc-tour-panel-navigation">
-<$list filter="[all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}count[]compare:number:gt[0]]" variable="ignore">
-<$button class="tc-btn-big-green" style="background-color: red;">
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]first[]] }}}/>
-{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
-back
-</$button>
-</$list>
-<$button class="tc-btn-big-green" style="background-color: purple;">
-<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]after{$:/state/tour/step}] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]last[]] }}}/>
-{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
-next
-</$button>
+	<$list filter="[all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}count[]compare:number:gt[0]]" variable="ignore">
+		<$button class="tc-btn-big-green" style="background-color: red;">
+			<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]allbefore{$:/state/tour/step}filter<filter-by-condition>last[]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]first[]] }}}/>
+			{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
+			back
+		</$button>
+	</$list>
+	<$button class="tc-btn-big-green" style="background-color: purple;">
+		<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]allafter{$:/state/tour/step}filter<filter-by-condition>first[]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]last[]] }}}/>
+		{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
+		next
+	</$button>
 </div>
 \end
 
+\procedure filter-by-condition()
+[<currentTiddler>has[condition]subfilter{!!condition}limit[1]] :else[<currentTiddler>!has[condition]then[true]]
+\end
+
+\whitespace trim
 <$list filter="[{$:/config/ShowTour}!is[blank]else[show]match[show]]" variable="ignore">
-<$let
-    currentStep={{{ [{$:/state/tour/step}!is[blank]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]] }}}
-    displayMode={{{ [<currentStep>get[display-mode]else[normal]] }}}
->
-<div class={{{ tc-tour-panel [<displayMode>addprefix[tc-tour-panel-]] +[join[ ]] }}}>
-<$list filter="[[$:/tour/BannerImage]has[title]]" variable="ignore">
-[img class="tc-tour-panel-banner-image" [$:/tour/BannerImage]]
-</$list>
-<div class="tc-tour-panel-inner">
-<div class="tc-tiddler-controls tc-tour-panel-controls">
-<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> ''Tour''
-</div>
-<$transclude tiddler=<<currentStep>> mode="block"/>
-<$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">
-<$button class="tc-btn-big-green" style="background-color: green;">
-<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[selector-fallback-2]] }}}/>
-<$transclude tiddler={{$:/state/tour/step}} field="hint" mode="inline"> show me a hint </$transclude>
-</$button>
-</$list>
-<$list filter="[<displayMode>match[fullscreen]]">
-<div style="text-align:center;font-size:1.5em;"><$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible" tooltip="exit tour">{{$:/core/images/close-button}}</$button></div>
-</$list>
-</div>
-</div>
-</$let>
+	<$let
+		currentStep={{{ [{$:/state/tour/step}!is[blank]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]filter<filter-by-condition>] }}}
+		displayMode={{{ [<currentStep>get[display-mode]else[normal]] }}}
+	>
+		<div class={{{ tc-tour-panel [<displayMode>addprefix[tc-tour-panel-]] +[join[ ]] }}}>
+			<$list filter="[[$:/tour/BannerImage]has[title]]" variable="ignore">
+				[img class="tc-tour-panel-banner-image" [$:/tour/BannerImage]]
+			</$list>
+			<div class="tc-tour-panel-inner">
+				<div class="tc-tiddler-controls tc-tour-panel-controls">
+					<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible">{{$:/core/images/close-button}}</$button> ''Tour''
+				</div>
+				<$transclude tiddler=<<currentStep>> mode="block"/>
+				<$list filter="[{$:/state/tour/step}has[selector]]" variable="ignore">
+					<$button class="tc-btn-big-green" style="background-color: green;">
+						<$action-sendmessage $message="tm-spotlight-element" selector={{{ [{$:/state/tour/step}get[selector]] }}} selector-fallback-1={{{ [{$:/state/tour/step}get[selector-fallback-1]] }}} selector-fallback-2={{{ [{$:/state/tour/step}get[selector-fallback-2]] }}}/>
+						<$transclude tiddler={{$:/state/tour/step}} field="hint" mode="inline"> show me a hint </$transclude>
+					</$button>
+				</$list>
+					<$list filter="[<displayMode>match[fullscreen]]">
+						<div style="text-align:center;font-size:1.5em;"><$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible" tooltip="exit tour">{{$:/core/images/close-button}}</$button></div>
+					</$list>
+				</div>
+		</div>
+	</$let>
 </$list>

@@ -26,11 +26,11 @@ var getTiddlerPath = function(title) {
 	}
 }
 
-var makepr = function(files,slug) {
+var makepr = function(files,slug,lingo) {
 	const MyOctokit = $tw.Octokit.plugin($tw.createPullRequest);
 	const TOKEN = $tw.utils.getPassword("github-docs-pr");
 	if(!TOKEN || !TOKEN.length) {
-		alert("please set the github personal access token");
+		alert("Please set the github personal access token");
 		return;
 	}
 	const octokit = new MyOctokit({
@@ -45,7 +45,7 @@ var makepr = function(files,slug) {
 	octokit.createPullRequest({
 		owner: REPO_OWNER,
 		repo: REPO,
-		title: $tw.wiki.getTiddlerText("$:/temp/pr-title"),
+		title: $tw.wiki.getTiddlerText("$:/temp/pr-title") || "Signing CLA",
 		body: $tw.wiki.getTiddlerText("$:/temp/pr-message"),
 		base: REPO_BRANCH /* To Do: allow optionally specifying branch via UI */,
 		head: `${PR_USER_BRANCH}-${Math.floor(Date.now() / 1000)}`,
@@ -53,18 +53,35 @@ var makepr = function(files,slug) {
 			{
 			/* optional: if `files` is not passed, an empty commit is created instead */
 				files: files,
-				commit: $tw.wiki.getTiddlerText("$:/temp/pr-title"),
+				commit: $tw.wiki.getTiddlerText("$:/temp/pr-title") || "Signing CLA",
 				emptyCommit : false,
 			},
 		],
 		createWhenEmpty: false,
 	})
 	.then((pr) => {
-	 	console.log(pr.data.number);
-		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text:"Submission request created", link: `https://github.com/${REPO_OWNER}/${REPO}/pull/${pr.data.number}`}));
+	 	//console.log(pr.data.number);
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text:"lingo.success", link: `https://github.com/${REPO_OWNER}/${REPO}/pull/${pr.data.number}`}));
 	}).catch((err)=>{
-		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `There was an error in submitting the updates. ${err}`}));		  
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `${lingo.error} ${err}`}));		  
 	});
+}
+
+var initpr = function(files,slug,lingo) {
+	if(!$tw.Octokit) {
+		$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `loading external library`}));
+		import("https://esm.sh/@octokit/core@5.0.0").then((module)=>{
+		 $tw.Octokit = module.Octokit;
+		 return import("https://esm.sh/octokit-plugin-create-pull-request@5.1.0");
+	 	}).then((module)=>{
+			$tw.createPullRequest = module.createPullRequest;
+			makepr(files,slug,lingo);
+	 	}).catch((err)=>{
+			$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `${lingo.error} ${err}`}));
+	 	});
+	} else {
+		makepr(files,slug,lingo);
+	}
 }
 
 exports.startup = function() {
@@ -74,7 +91,7 @@ exports.startup = function() {
 			slug = paramObject.slug,
 			tiddlersToUpload = $tw.wiki.filterTiddlers(filter,$tw.rootWidget),
 			files = {};
-		if(tiddlersToUpload.length) {
+		if(!paramObject.cla && tiddlersToUpload.length) {
 			$tw.utils.each(tiddlersToUpload,function(title){
 				//check if tiddler exists?
 				var tiddler = $tw.wiki.getTiddler(title);
@@ -95,20 +112,20 @@ exports.startup = function() {
 					files[path] = tid;
 				}
 			});
-			console.log(files);
-			if(!$tw.Octokit) {
- 			  	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `loading external library`}));
-				import("https://esm.sh/@octokit/core@5.0.0").then((module)=>{
-					$tw.Octokit = module.Octokit;
-					return import("https://esm.sh/octokit-plugin-create-pull-request@5.1.0");
-				}).then((module)=>{
-					$tw.createPullRequest = module.createPullRequest;
-					makepr(files,slug);
-				}).catch((err)=>{
-					$tw.wiki.addTiddler(new $tw.Tiddler({title: STATUS_TITLE, text: `There was an error in submitting the update. ${err}`}));
-				});
-			} else {
-				makepr(files,slug);
+			var lingo = {
+				"error": "There was an error in submitting the update.",
+				"success": "Submission request created"
+			};
+			initpr(files,slug,lingo);
+		} else if(paramObject.cla) {
+			var cla = $tw.wiki.getTiddlerText(paramObject.cla,"");
+			if(cla) {
+				var lingo = {
+					"error": "There was an error in signing the CLA.",
+					"success": "Request to sign the CLA has been submitted. You may continue."
+				}
+				files["licenses/cla-entity.md"] = $tw.wiki.getTiddlerText(paramObject.cla,"");
+				initpr(files,"Signing-CLA",lingo);
 			}
 		}
 	});
