@@ -31,7 +31,7 @@ This is a legal agreement that allows contributors to assert that they own the c
 
 Please [[read the CLA|https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-com/licenses/cla-individual.md]] and confirm below that you wish to sign it. You only have to do this once!
 
-<$list filter="[{$:/temp/contribute/gitusername}!is[blank]]" variable="null" emptyMessage="""<p class="tc-error" style="padding:0.5em;">Please provide your ~GitHub username in the previous step in order to sign the CLA.</p>""">
+<$list filter="[{$:/temp/contribute/gitusername}!is[blank]]" variable="null" emptyMessage="""<p class="tc-error" style="padding:0.5em;">Please provide your ~GitHub username in the previous steps in order to sign the CLA.</p>""">
 <$button class="tc-btn-big-green" actions=<<sign-cla>> >Sign the CLA
 </$button>
 
