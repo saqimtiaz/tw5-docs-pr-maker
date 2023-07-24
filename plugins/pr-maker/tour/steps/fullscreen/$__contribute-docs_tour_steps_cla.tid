@@ -9,7 +9,7 @@ condition: [{$:/temp/contribute/cla}!is[blank]] :then[{$:/temp/contribute/gituse
 <$let
     cla-tiddler="$:/temp/contribute/cla"
     original={{{ [<cla-tiddler>get[text]] }}}
-    signature=`@${ [{$:/temp/contribute/gitusername}] }$, ${ [<now YYYY-0MM-0DD>] }$`
+    signature=`@${ [{$:/temp/contribute/gitusername}] }$, ${ [<now YYYY/0MM/0DD>] }$`
 >
 <$action-setfield $tiddler=<<cla-tiddler>> text=`$(original)$
 $(signature)$`/>
