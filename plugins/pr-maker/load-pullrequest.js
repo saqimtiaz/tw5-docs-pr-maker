@@ -111,8 +111,13 @@ exports.startup = async function() {
 		let octokit;
 		try {
 			await loadOctokit();
+			const TOKEN = $tw.utils.getPassword("github-docs-pr");
+			if(!TOKEN || !TOKEN.length) {
+				alert("Please set the github personal access token");
+				return;
+			}
 			octokit = new $tw.Octokit({
-				auth: $tw.utils.getPassword("github-docs-pr")
+				auth: TOKEN
 			});
 
 			const pr = await getPR(pr_id);
