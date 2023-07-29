@@ -68,7 +68,7 @@ const createPR = async function() {
 		octokit = new MyOctokit({
 			auth: token
 		});
-		const prUserBranch = metadata["branch"].substring(0,35),
+		const prUserBranch = metadata["branch"],
 			repoOwner = $tw.wiki.getTiddlerText(REPO_OWNER_TITLE),
 			repo = $tw.wiki.getTiddlerText(REPO_TITLE);
 		updateStatus(`Creating submission...`);
@@ -86,8 +86,8 @@ const createPR = async function() {
 			base: $tw.wiki.getTiddlerText(REPO_BRANCH_TITLE),
 			//user branch to push changes to
 			head: prUserBranch,
-			update: metadata["exists"] === "true",
-			draft: metadata["isdraft"] === "true",
+			update: metadata["exists"] === "yes",
+			draft: metadata["isdraft"] === "yes",
 			changes: [
 				{
 					files: pullrequest.files,

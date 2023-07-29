@@ -28,3 +28,9 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 	/>
 </$let>
 \end
+
+\procedure saveDraft()
+\procedure tv-action-refresh-policy() always
+<$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-isdraft="yes"/>
+<<submitChanges>>
+\end

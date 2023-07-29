@@ -3,9 +3,6 @@ title: $:/plugins/sq/contribute/startup/load-pullrequest.js
 type: application/javascript
 module-type: startup
 
-collabwriter
-docuwriter
-
 \*/
 
 (function(){
@@ -129,12 +126,13 @@ async function loadPR(pr_id) {
 		const pr = await getPR(pr_id);
 
 		const pr_metadata = {
-			"pr-title" : pr.title,
-			"pr-body" : pr.body,
-			"pr-url" : pr.html_url,
-			"pr-branch" : pr.head.ref,
-			"pr-exists" : "true",
-			"pr-id" : pr_id
+			"pr-title": pr.title,
+			"pr-body": pr.body,
+			"pr-url": pr.html_url,
+			"pr-branch": pr.head.ref,
+			"pr-exists": "yes",
+			"pr-id": pr_id,
+			"pr-isdraft": pr.draft ? "yes" : "no"
 		};
 
 		Logger.log("PR exists");
@@ -174,25 +172,3 @@ exports.startup = async function() {
 };
 
 })();
-
-/*
-
-To do:
-	- refactor makePR code to be more generic, just accepts text chunks (or tiddler) to save as files, along with PR metadata
-		- means all the metadata handling happens in wikitext
-	- have a flag to indicate that we have loaded an existing PR and offer option to update existing PR or submit as new PR
-	- save as draft option, can be loaded again to continue work. (instead of backup)
-	- floating ? button, opens a tiddler:
-		- show intro again
-		- load an existing PR (including drafts)
-		- settings
-	- settings button also in submission form
-	- load existing PR button in submission form
-	- tour explanation for loading existing PR and saving as draft
-		- new tour that can be opened from submission form?
-		- which tour opens is controlled by their config tiddler, and the config tiddlers can themselves be tagged and provide the tag for the tour
-		- so for example tiddlers tagged $:/tags/tour and each one in the text field provides the tag for that tour
-	- comment in body of PR that PR was created with PR maker
-	- add comment via API to edit PR in pr maker
-	- handle tiddler deletions
-*/

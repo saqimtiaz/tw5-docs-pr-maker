@@ -44,6 +44,12 @@ title: Submit documentation updates
 	</$let>
 
 	<$button
+		actions=<<saveDraft>> 
+		class="submit"
+		>
+		Save as draft
+	</$button>
+	<$button
 		actions=<<submitChanges>> 
 		class="submit"
 		>
@@ -53,7 +59,7 @@ title: Submit documentation updates
 	<$list filter="[<CONTRIBUTION_MAKEPR_STATE>get[text]!is[blank]]">
 		<div class="submission-status">
 			<$list filter="[<CONTRIBUTION_MAKEPR_STATE>has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
-			<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/></a>
+			<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/>{{$:/core/images/open-window}}</a>
 				<$list filter="[<currentTiddler>get[text]prefix[Submission request created]]">
 					<$confetti/>
 					<$confetti delay=300 originY=0.6  spread=100 scalar=1.5/>
