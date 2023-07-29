@@ -17,25 +17,25 @@ const OCTOKIT_URL_TILE = "$:/config/contribute/octokit/url",
 	CREATEPULLREQUEST_URL_TITLE = "$:/config/contribute/octokit/createPullRequest/url",
 	REPO_OWNER_TITLE = "$:/config/contribute/createPR/repo/owner",
 	REPO_BRANCH_TITLE = "$:/config/contribute/createPR/repo/branch",
-	REPO_TITLE = "$:/config/contribute/createPR/repo",
-	STATETITLE = "$:/temp/contribute/createPR/status";
+	REPO_TITLE = "$:/config/contribute/createPR/repo";
 
 let pullrequest,
 	Logger;
 
 const updateStatus = function(text,fields) {
-	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATETITLE, text: text},fields));
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: pullrequest.stateTitle, text: text},fields));
 };
 
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
-const initPR = function() {
+const initPR = function(stateTitle) {
 	pullrequest = Object.create(null);
 	pullrequest.files = Object.create(null);
 	pullrequest.lingo = {
 		"success": "Submission request created.",
 		"error": "There was an error in submitting the update."
-	}
+	};
+	pullrequest.stateTitle = stateTitle;
 };
 
 const addToPr = function(path,data) {
@@ -106,7 +106,7 @@ exports.startup = function() {
 	Logger = new $tw.utils.Logger("load-pullrequest");
 
 	$tw.rootWidget.addEventListener("tm-pr-init",function(event){
-		initPR();
+		initPR(event.param);
 	});
 
 	$tw.rootWidget.addEventListener("tm-pr-add",function(event){
