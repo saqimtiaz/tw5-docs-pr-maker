@@ -43,10 +43,12 @@ const addToPr = function(path,data) {
 };
 
 async function loadOctokit() {
+	updateStatus(`loading external library`);
 	if(!$tw.Octokit) {
-		updateStatus(`loading external library`);
 		const { Octokit } = await import($tw.wiki.getTiddlerText(OCTOKIT_URL_TILE));
 		$tw.Octokit = Octokit;
+	}
+	if(!$tw.createPullRequest) {
 		const { createPullRequest} = await import($tw.wiki.getTiddlerText(CREATEPULLREQUEST_URL_TITLE));
 		$tw.createPullRequest = createPullRequest;
 	}
@@ -141,10 +143,10 @@ exports.startup = function() {
 			updateStatus("Incomplete data provided to create a PR");
 			return;
 		}
-		if(event.paramObject.successMessage) {
+		if(!!event.paramObject.successMessage) {
 			pullrequest.lingo.success = paramObject.successMessage;
 		}
-		if(event.paramObject.errorMessage) {
+		if(!!event.paramObject.errorMessage) {
 			pullrequest.lingo.error = paramObject.errorMessage;
 		}
 		createPR();

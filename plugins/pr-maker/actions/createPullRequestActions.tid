@@ -13,13 +13,18 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 		</$let>
 	</$wikify>
 </$list>
-<$action-sendmessage
-	$message="tm-pr-create"
-	$names="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]]"
-	$values="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]] :map[<CONTRIBUTION_FORM_STATE>get<currentTiddler>]"
-	pr-branch={{{ [<CONTRIBUTION_FORM_STATE>get[pr-branch]] :else[<CONTRIBUTION_FORM_STATE>get[pr-title]slugify[]addsuffix[-]addsuffix<now YYYY0MM0DD0hh0mm0ss0XXX>] }}}
-	pr-body=`${[<CONTRIBUTION_FORM_STATE>get[pr-body]]}$
+<$let pr-body-signature=`
 
 ---
-Submitted using ${ [{$:/info/url/full}] }$.`/>
+<small>Submitted using ${ [{$:/info/url/full}] }$.</small>`
+>
+	<$action-sendmessage
+		$message="tm-pr-create"
+		$names="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]]"
+		$values="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]] :map[<CONTRIBUTION_FORM_STATE>get<currentTiddler>]"
+		pr-branch={{{ [<CONTRIBUTION_FORM_STATE>get[pr-branch]] :else[<CONTRIBUTION_FORM_STATE>get[pr-title]slugify[]addsuffix[-]addsuffix<now YYYY0MM0DD0hh0mm0ss0XXX>] }}}
+		pr-body=`${[<CONTRIBUTION_FORM_STATE>get[pr-body]]}$`
+		pr-body=`${[<CONTRIBUTION_FORM_STATE>get[pr-body]]}$ ${[<CONTRIBUTION_FORM_STATE>get[pr-exists]!match[true]then<pr-body-signature>else[]]}$`
+	/>
+</$let>
 \end

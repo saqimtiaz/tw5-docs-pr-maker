@@ -1,6 +1,8 @@
 tags: $:/tags/sq/change-actions
 title: $:/plugins/sq/makepr/autotrack-actions
 
-<$list filter="[enlist<actionTiddler>!is[draft]] :filter[{$:/config/sq/makepr/autotrack}match[yes]]" >
-<$action-listops $tiddler="$:/temp/contribute/contributionFormState" $field="text" $subfilter={{{ [<currentTiddler>format:titlelist[]] }}}/>
+\import [[$:/plugins/sq/contribute/variables]]
+
+<$list filter="[enlist<actionTiddler>!is[draft]] :filter[{$:/config/contribute/trackChanges}match[yes]]" >
+<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="text" $subfilter={{{ [<currentTiddler>format:titlelist[]] }}}/>
 </$list>

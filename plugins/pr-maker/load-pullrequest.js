@@ -15,15 +15,17 @@ exports.name = "contribute-getpr-handler";
 exports.platforms = ["browser"];
 exports.after = ["startup"];
 
-const STATETITLE = "$:/temp/contribute/loadPR/status",
-	FORMSTATE = "$:/temp/contribute/contributionFormState";
-	//make this a parameter specified on the message
+let stateTitle,
+	prStateTitle,
+	Logger;
+
+const OCTOKIT_URL_TILE = "$:/config/contribute/octokit/url",
+	REPO_OWNER_TITLE = "$:/config/contribute/createPR/repo/owner",
+	REPO_TITLE = "$:/config/contribute/createPR/repo";
 
 const updateStatus = function(text) {
-	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATETITLE, text: text}));
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: stateTitle, text: text}));
 };
-
-let Logger;
 
 function convertFilesToTiddlers(files) {
 	const deserializer = $tw.Wiki.tiddlerDeserializerModules["application/x-tiddler"];
@@ -53,15 +55,14 @@ function convertFilesToTiddlers(files) {
 };
 
 function savePRMetadata(data) {
-	var tiddler = new $tw.Tiddler({title: FORMSTATE},data);
+	var tiddler = new $tw.Tiddler({title: prStateTitle},data);
 	$tw.wiki.addTiddler(tiddler);
 };
-
 
 async function loadOctokit() {
 	if(!$tw.Octokit) {
 		updateStatus(`loading external library`);
-		const { Octokit } = await import("https://esm.sh/octokit");
+		const { Octokit } = await import($tw.wiki.getTiddlerText(OCTOKIT_URL_TILE));
 		$tw.Octokit = Octokit;
 	}
 };
@@ -71,9 +72,9 @@ async function loadPR(pr_id) {
 	async function getBlob(octokit,sha) {
 		updateStatus("Loading the PR files...");
 		const blob = await octokit.request(
-			`GET /repos/Jermolene/TiddlyWiki5/git/blobs/${sha}`, {
-			owner: 'jermolene',
-				repo: 'TiddlyWiki5',
+			`GET /repos/${repoOwner}/${repo}/git/blobs/${sha}`, {
+				owner: repoOwner,
+				repo: repo,
 				file_sha: sha,
 				  headers: {
 			'X-GitHub-Api-Version': '2022-11-28'
@@ -84,9 +85,9 @@ async function loadPR(pr_id) {
 	
 	async function getPR(pr_id) {
 		updateStatus("Finding the PR...")
-		const pr = await octokit.request(`GET /repos/jermolene/TiddlyWiki5/pulls/${pr_id}`, {
-			owner: 'jermolene',
-			repo: 'TiddlyWiki5',
+		const pr = await octokit.request(`GET /repos/${repoOwner}/${repo}/pulls/${pr_id}`, {
+			owner: repoOwner,
+			repo: repo,
 			pull_number: `${pr_id}`,
 			headers: {
 			  'X-GitHub-Api-Version': '2022-11-28'
@@ -101,9 +102,9 @@ async function loadPR(pr_id) {
 
 	async function getFilesForPR(pr_id) {
 		updateStatus("Finding the changes for the PR...")
-		return await octokit.request(`GET /repos/jermolene/TiddlyWiki5/pulls/${pr_id}/files`, {
-			owner: 'jermolene',
-			repo: 'TiddlyWiki5',
+		return await octokit.request(`GET /repos/${repoOwner}/${repo}/pulls/${pr_id}/files`, {
+			owner: repoOwner,
+			repo: repo,
 			pull_number: `${pr_id}`,
 			headers: {
 				'X-GitHub-Api-Version': '2022-11-28'
@@ -111,6 +112,8 @@ async function loadPR(pr_id) {
 		});
 	};
 
+	const repoOwner = $tw.wiki.getTiddlerText(REPO_OWNER_TITLE),
+		repo = $tw.wiki.getTiddlerText(REPO_TITLE);
 	let octokit;
 	try {
 		await loadOctokit();
@@ -161,6 +164,11 @@ exports.startup = async function() {
 	Logger = new $tw.utils.Logger("load-pullrequest");
 	$tw.rootWidget.addEventListener("tm-loadpr",function(event){
 		var pr_id = event.param;
+		stateTitle = event.paramObject && event.paramObject.loadState,
+		prStateTitle = event.paramObject && event.paramObject.prState;
+		if(!pr_id || ! stateTitle || !prStateTitle) {
+			return;
+		}
 		loadPR(pr_id);
 	});
 };
