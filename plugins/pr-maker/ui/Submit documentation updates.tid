@@ -55,14 +55,14 @@ title: Submit documentation updates
 	<$button
 		actions=<<saveDraft>> 
 		class="btn-big btn-secondary"
-		tooltip="Save your changes as a draft on ~GitHub to continue working on them later"
+		tooltip="Save your changes as a draft on GitHub to continue working on them later"
 		>
 		Save as draft
 	</$button>
 	<$button
 		actions=<<submitChanges>> 
 		class="btn-big"
-		tooltip="Submit your document changes"
+		tooltip="Submit your documentation changes"
 	>
 		Submit documentation update
 	</$button>
