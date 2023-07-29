@@ -1,5 +1,5 @@
 /*\
-title: $:/plugins/sq/contributor/load-pullrequest/startup.js
+title: $:/plugins/sq/contribute/startup/load-pullrequest.js
 type: application/javascript
 module-type: startup
 
@@ -11,12 +11,13 @@ docuwriter
 (function(){
 
 
-exports.name = "getpr-handler";
+exports.name = "contribute-getpr-handler";
 exports.platforms = ["browser"];
 exports.after = ["startup"];
 
-const STATETITLE = "$:/temp/contribute-docs/load-pr/status",
-	FORMSTATE = "$:/temp/contribute-docs/form-state";
+const STATETITLE = "$:/temp/contribute/loadPR/status",
+	FORMSTATE = "$:/temp/contribute/contributionFormState";
+	//make this a parameter specified on the message
 
 const updateStatus = function(text) {
 	$tw.wiki.addTiddler(new $tw.Tiddler({title: STATETITLE, text: text}));
@@ -125,11 +126,12 @@ async function loadPR(pr_id) {
 		const pr = await getPR(pr_id);
 
 		const pr_metadata = {
-			pr_title: pr.title,
-			pr_body: pr.body,
-			pr_url: pr.html_url,
-			pr_branch: pr.head.ref,
-			pr_exists: true
+			"pr-title" : pr.title,
+			"pr-body" : pr.body,
+			"pr-url" : pr.html_url,
+			"pr-branch" : pr.head.ref,
+			"pr-exists" : "true",
+			"pr-id" : pr_id
 		};
 
 		Logger.log("PR exists");

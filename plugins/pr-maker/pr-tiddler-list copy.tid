@@ -1,7 +1,18 @@
-title: $:/plugins/sq/makepr/pr-tiddler-list
+title: $:/plugins/sq/makepr/pr-tiddler-list-old
+
+\define pr-tiddler-list() $:/temp/pr-tiddlers
+
+\define advanced-filter() [[$:/temp/pr-tiddlers]get[text]enlist-input[]] [[$:/temp/pr-tiddlers]get[text]enlist-input[]addprefix[$:/temp/prpath-]] [prefix[$:/temp/pr-]] [prefix[$:/config/sq/makepr/]]
+
+\define show-in-search() 
+<$action-setfield $tiddler="$:/temp/advancedsearch" text=<<advanced-filter>>/>
+<$action-setfield $tiddler="$:/temp/advancedsearch/input" text=<<advanced-filter>>/>
+<$action-setfield $tiddler="$:/state/tab--1498284803" text="$:/core/ui/AdvancedSearch/Filter"/>
+<$action-navigate $to="$:/AdvancedSearch"/>
+\end
 
 \define drop-actions()
-<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="text" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+<$action-listops $tiddler=<<pr-tiddler-list>> $field="text" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
 \end
 
 \define placeholder()
@@ -15,7 +26,7 @@ title: $:/plugins/sq/makepr/pr-tiddler-list
 <div>
 <$button  tooltip="Remove this tiddler"  class="tc-btn-invisible tc-btn-mini tc-small-gap-right">
 {{$:/core/images/close-button}}
-<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="text" $subfilter="-[<currentTiddler>]"/>
+<$action-listops $tiddler=<<pr-tiddler-list>> $field="text" $subfilter="-[<currentTiddler>]"/>
 </$button><$link to={{!!title}}><$view field="title"/></$link>
 </div>
 </$droppable>
@@ -26,7 +37,7 @@ title: $:/plugins/sq/makepr/pr-tiddler-list
 //Drag and drop below to add tiddlers://
 <$button class="tc-btn-invisible pr-listmode-btn" set="$:/state/pr-list-mode" setTo="text" tooltip="use text editor">{{$:/core/images/edit-button}}</$button>
 <$button class="tc-btn-invisible pr-listmode-btn" tooltip="Show list in $:/AdvancedSearch to export" actions=<<show-in-search>>>{{$:/core/images/export-button}}</$button>
-<$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]]" history=<<tv-history-list>> storyview="pop">
+<$list filter="[<pr-tiddler-list>get[text]enlist-input[]]" history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
 <$macrocall $name="droppable-item"/>
 </div>
@@ -39,5 +50,5 @@ title: $:/plugins/sq/makepr/pr-tiddler-list
 <$reveal tag="div" class="" state="$:/state/pr-list-mode" text="dnd" type="nomatch" default="dnd">
 <$button class="tc-btn-invisible pr-listmode-btn" set="$:/state/pr-list-mode" setTo="dnd" tooltip="use drag and drop">{{$:/images/tabler-icons/drag-drop-2}}</$button>
 //Use double square brackets around titles with spaces//
-<$edit-text tiddler=<<CONTRIBUTION_FORM_STATE>> default="" tag="textarea" class="tc-edit-texteditor"/>
+<$edit-text tiddler="$:/temp/pr-tiddlers" default="" tag="textarea" class="tc-edit-texteditor"/>
 </$reveal>

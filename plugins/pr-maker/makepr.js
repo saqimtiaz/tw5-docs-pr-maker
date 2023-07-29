@@ -130,13 +130,14 @@ module-type: startup
 				}
 			}
 		});
-		
+		/*
 		$tw.wiki.addEventListener("change",function(changes){
 			var modifiedTiddlers = Object.keys(changes).filter(tiddler => !tiddler.startsWith("$:/") && !changes[tiddler].deleted);
 			if(modifiedTiddlers.length) {
 				$tw.rootWidget.invokeActionsByTag("$:/tags/sq/change-actions",null,{"actionTiddler": $tw.utils.stringifyList(modifiedTiddlers)});
 			}
 		});
+		*/
 	};
 	
 	})();

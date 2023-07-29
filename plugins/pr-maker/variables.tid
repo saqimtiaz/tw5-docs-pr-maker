@@ -1,0 +1,4 @@
+title: $:/plugins/sq/contribute/variables
+
+\procedure CONTRIBUTION_FORM_STATE() $:/temp/contribute/contributionFormState
+\procedure CONTRIBUTION_MAKEPR_STATE() $:/temp/contribute/createPR/status

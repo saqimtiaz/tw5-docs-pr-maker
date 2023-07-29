@@ -1,6 +1,6 @@
 {
-	"title": "$:/plugins/sq/docs-pr-maker",
-	"name": "Docs PR maker",
-	"description": "Creates pull requests for documentation contributions",
+	"title": "$:/plugins/sq/contribute",
+	"name": "Contribute",
+	"description": "Submit documentation contributions",
 	"list": "readme"
 }
