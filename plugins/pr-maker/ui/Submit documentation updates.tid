@@ -11,6 +11,15 @@ title: Submit documentation updates
 \end
 
 <div class="submission-form">
+
+	<$button set=<<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>> setTo={{{ [<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>get[text]match[show]then[hide]else[show]] }}} tooltip="Load and resume work on a saved submission" class="btn-big btn-muted tc-float-right">
+		Load a saved submission? <!--<$transclude tiddler={{{[<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>get[text]match[show]then[$:/core/images/up-arrow]else[$:/core/images/down-arrow]]}}} />-->
+	</$button>
+	
+	<$reveal type="match" state=<<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>> text="show" tag="div" class="form-group" retain="yes" animate="yes">
+		{{$:/plugins/sq/contribute/ui/load-Submission}}
+	</$reveal>
+
 	<div class="form-group">
 		<h2>Review tiddlers to be submitted:</h2>
 		<p>//(any tiddlers you modify or create are automatically added here)//</p>
@@ -45,26 +54,35 @@ title: Submit documentation updates
 
 	<$button
 		actions=<<saveDraft>> 
-		class="submit"
+		class="btn-big btn-secondary"
+		tooltip="Save your changes as a draft on ~GitHub to continue working on them later"
 		>
 		Save as draft
 	</$button>
 	<$button
 		actions=<<submitChanges>> 
-		class="submit"
-		>
+		class="btn-big"
+		tooltip="Submit your document changes"
+	>
 		Submit documentation update
 	</$button>
 
 	<$list filter="[<CONTRIBUTION_MAKEPR_STATE>get[text]!is[blank]]">
 		<div class="submission-status">
 			<$list filter="[<CONTRIBUTION_MAKEPR_STATE>has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
-			<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/>{{$:/core/images/open-window}}</a>
-				<$list filter="[<currentTiddler>get[text]prefix[Submission request created]]">
-					<$confetti/>
-					<$confetti delay=300 originY=0.6  spread=100 scalar=1.5/>
-					<$confetti delay=400 originY=0.55 spread=130/>
-					<$confetti delay=500 originY=0.55 spread=170 scalar=2/>
+				<$list filter="[<CONTRIBUTION_FORM_STATE>get[pr-isdraft]match[yes]]">
+					<p>
+						Your changes have been saved as a draft on Github at <$text text={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}}/>. Make a note of this URL in order to continue work on your draft at a later time.
+					</p>
+				</$list>
+				<$list filter="[<CONTRIBUTION_FORM_STATE>!has[pr-isdraft]]" variable="null">
+					<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/>{{$:/core/images/open-window}}</a>
+					<$list filter="[<currentTiddler>get[status]match[complete]]">
+						<$confetti/>
+						<$confetti delay=300 originY=0.6  spread=100 scalar=1.5/>
+						<$confetti delay=400 originY=0.55 spread=130/>
+						<$confetti delay=500 originY=0.55 spread=170 scalar=2/>
+					</$list>
 				</$list>
 			</$list>
 		</div>

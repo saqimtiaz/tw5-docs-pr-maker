@@ -97,7 +97,7 @@ const createPR = async function() {
 			],
 			createWhenEmpty: false
 		});
-		updateStatus(pullrequest.lingo.success,{link: `https://github.com/${repoOwner}/${repo}/pull/${pr.data.number}`});
+		updateStatus(pullrequest.lingo.success,{link: `https://github.com/${repoOwner}/${repo}/pull/${pr.data.number}`, status: "complete"});
 	} catch (err) {
 		updateStatus(`${pullrequest.lingo.error} ${err}`);
 	}

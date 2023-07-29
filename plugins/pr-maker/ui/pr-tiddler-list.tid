@@ -25,7 +25,6 @@ title: $:/plugins/sq/makepr/pr-tiddler-list
 <$droppable tag="div" actions=<<drop-actions>> enable="yes">
 //Drag and drop below to add tiddlers://
 <$button class="tc-btn-invisible pr-listmode-btn" set="$:/state/pr-list-mode" setTo="text" tooltip="use text editor">{{$:/core/images/edit-button}}</$button>
-<$button class="tc-btn-invisible pr-listmode-btn" tooltip="Show list in $:/AdvancedSearch to export" actions=<<show-in-search>>>{{$:/core/images/export-button}}</$button>
 <$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]]" history=<<tv-history-list>> storyview="pop">
 <div class="tc-sidebar-tab-open-item">
 <$macrocall $name="droppable-item"/>

@@ -69,7 +69,7 @@ tags: $:/tags/Stylesheet
 	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
-.submission-form button.submit {
+.submission-form button.btn-big {
 	font-weight: 400;
 	text-align: center;
 	white-space: nowrap;
@@ -80,20 +80,40 @@ tags: $:/tags/Stylesheet
 	border-radius: 0.25rem;
 }
 
-.submission-form button.submit:not(:disabled):hover {
+.submission-form button.btn-big:not(:disabled):hover {
     color: #fff;
     background-color: #0069d9;
     border-color: #0062cc;
 }
 
-.submission-form button.submit:not(:disabled) {
+.submission-form button.btn-big:not(:disabled) {
 	cursor: pointer;
 	color: #fff;
+	fill: #fff;
 	background-color: #007bff;
 	border: 1px solid transparent;
 	border-color: #007bff;
 	transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
 
+.submission-form button.btn-big.btn-muted:not(:disabled) {
+	background-color: #acacac;
+	border-color: #acacac;
+}
+
+.submission-form button.btn-big.btn-muted:not(:disabled):hover {
+	background-color: #888;
+	border-color: #555;
+}
+
+.submission-form button.btn-big.btn-secondary:not(:disabled) {
+	background-color: #1c901a;
+	border-color: #1c901a;
+}
+
+.submission-form button.btn-big.btn-secondary:not(:disabled):hover {
+	background-color: #227e20;
+	border-color: #216f1f;
 }
 
 .submission-status {

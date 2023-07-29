@@ -3,4 +3,5 @@ title: $:/plugins/sq/contribute/variables
 \procedure CONTRIBUTION_FORM_STATE() $:/temp/contribute/contributionFormState
 \procedure CONTRIBUTION_MAKEPR_STATE() $:/temp/contribute/createPR/status
 \procedure CONTRIBUTION_LOADPR_STATE() $:/temp/contribute/loadPR/status
-\procedure CONTRIBUTION_LOADPR_FORMSTATE() $:/temp/contribute/loadPR/formState
+\procedure CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE() $:/temp/contribute/loadPR/formDisplayState
+\procedure CONTRIBUTION_LOADPR_FORM_STATE() $:/temp/contribute/loadPR/formState
