@@ -20,8 +20,8 @@ const OCTOKIT_URL_TILE = "$:/config/contribute/octokit/url",
 	REPO_OWNER_TITLE = "$:/config/contribute/createPR/repo/owner",
 	REPO_TITLE = "$:/config/contribute/createPR/repo";
 
-const updateStatus = function(text) {
-	$tw.wiki.addTiddler(new $tw.Tiddler({title: stateTitle, text: text}));
+const updateStatus = function(text,fields) {
+	$tw.wiki.addTiddler(new $tw.Tiddler({title: stateTitle, text: text},fields));
 };
 
 function convertFilesToTiddlers(files) {
@@ -151,7 +151,7 @@ async function loadPR(pr_id) {
 		let tiddlersCreated = convertFilesToTiddlers(files);
 		if(tiddlersCreated) {
 			savePRMetadata(pr_metadata);
-			updateStatus("PR has been loaded. You can make further changes and submit them.");
+			updateStatus("The submission has been loaded. You can make further changes and submit them.",{status: "complete"});
 		}
 	} catch (err) {
 		updateStatus(`There was an error loading the pull request ${err}.`);

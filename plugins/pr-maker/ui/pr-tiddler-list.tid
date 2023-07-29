@@ -36,7 +36,7 @@ title: $:/plugins/sq/makepr/pr-tiddler-list
 </$droppable>
 </$reveal>
 <$reveal tag="div" class="" state="$:/state/pr-list-mode" text="dnd" type="nomatch" default="dnd">
-<$button class="tc-btn-invisible pr-listmode-btn" set="$:/state/pr-list-mode" setTo="dnd" tooltip="use drag and drop">{{$:/images/tabler-icons/drag-drop-2}}</$button>
+<$button class="tc-btn-invisible pr-listmode-btn" set="$:/state/pr-list-mode" setTo="dnd" tooltip="use drag and drop">{{$:/plugins/sq/contribute/images/drag-drop}}</$button>
 //Use double square brackets around titles with spaces//
 <$edit-text tiddler=<<CONTRIBUTION_FORM_STATE>> default="" tag="textarea" class="tc-edit-texteditor"/>
 </$reveal>

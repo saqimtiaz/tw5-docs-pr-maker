@@ -1,0 +1,10 @@
+background: linear-gradient(90deg,#f5f5ff, #ffffff)
+button-color: #00009a
+button-text: Start walkthrough
+caption: Walkthrough
+icon: 
+link: walkthrough
+tags: [[Contribute Help]]
+title: $:/plugins/sq/contribute/introductory-tour
+
+A walkthrough to get you started submitting updates to the documentation

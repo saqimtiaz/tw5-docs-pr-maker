@@ -32,6 +32,11 @@ tags: $:/tags/Stylesheet
 	top:1px;
 }
 
+.submission-form:after {
+	content: "";
+	clear: both;
+	display: table;
+}
 
 .submission-form .form-group {
 	margin-bottom: 1rem;
@@ -69,6 +74,16 @@ tags: $:/tags/Stylesheet
 	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
+.submission-form button svg.tc-image-button {
+	height: 1.8em;
+	width: 1.8em;
+	fill: #aaa;
+}
+
+.submission-form button:hover svg.tc-image-button {
+	fill: #333;
+}
+
 .submission-form button.btn-big {
 	font-weight: 400;
 	text-align: center;
@@ -78,6 +93,7 @@ tags: $:/tags/Stylesheet
 	font-size: 1rem;
 	line-height: 1.5;
 	border-radius: 0.25rem;
+	margin-left: 1em;
 }
 
 .submission-form button.btn-big:not(:disabled):hover {

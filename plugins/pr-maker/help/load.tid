@@ -1,0 +1,11 @@
+background: linear-gradient(90deg,#fff4f2, #ffffff)
+button-color: #ff4522
+button-text: Loading saved changes
+caption: Loading saved changes
+icon: 
+link: load
+tags: [[Contribute Help]]
+title: $:/plugins/sq/contribute/load
+disabled: yes
+
+How to load previously submitted updates and make further changes

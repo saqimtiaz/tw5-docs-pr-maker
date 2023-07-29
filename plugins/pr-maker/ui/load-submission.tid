@@ -2,7 +2,7 @@ title: $:/plugins/sq/contribute/ui/load-Submission
 
 \procedure loadPR()
 <$action-deletetiddler $tiddler=<<CONTRIBUTION_FORM_STATE>> />
-<$<$action-deletetiddler tiddler=<<CONTRIBUTION_LOADPR_STATE>>  />
+<$action-deletetiddler tiddler=<<CONTRIBUTION_LOADPR_STATE>> />
 <$let prID={{{ [<CONTRIBUTION_LOADPR_FORM_STATE>get[text]trim:start[https://github.com/Jermolene/TiddlyWiki5/pull/]] }}}>
     <$action-sendmessage $message="tm-loadpr" $param=<<prID>> loadState=<<CONTRIBUTION_LOADPR_STATE>> prState=<<CONTRIBUTION_FORM_STATE>>/>
 </$let>
@@ -14,3 +14,8 @@ title: $:/plugins/sq/contribute/ui/load-Submission
 </label>
 <small>Example: <$text text="https://github.com/Jermolene/TiddlyWiki5/pull/6191"/></small>
 <$button actions=<<loadPR>> class="tc-float-right btn-big">Load</$button>
+<$list filter="[<CONTRIBUTION_LOADPR_STATE>get[text]!is[blank]]">
+    <div class="submission-status">
+        <$text text=<<currentTiddler>>/>
+    </div>
+</$list>

@@ -1,0 +1,11 @@
+background: linear-gradient(90deg,#f0fff1, #ffffff)
+button-color: #37753e
+button-text: Submitting changes
+caption: Submitting changes
+icon: 
+link: submit
+tags: [[Contribute Help]]
+title: $:/plugins/sq/contribute/submit
+disabled: yes
+
+How to submit your changes

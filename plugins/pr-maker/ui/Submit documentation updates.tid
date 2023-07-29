@@ -53,19 +53,26 @@ title: Submit documentation updates
 	</$let>
 
 	<$button
-		actions=<<saveDraft>> 
-		class="btn-big btn-secondary"
-		tooltip="Save your changes as a draft on GitHub to continue working on them later"
-		>
-		Save as draft
-	</$button>
-	<$button
 		actions=<<submitChanges>> 
-		class="btn-big"
+		class="btn-big btn-secondary tc-float-right"
 		tooltip="Submit your documentation changes"
 	>
 		Submit documentation update
 	</$button>
+	<$button
+		actions=<<saveDraft>> 
+		class="btn-big tc-float-right"
+		tooltip="Save your changes as a draft on GitHub to continue working on them later"
+	>
+		Save as draft
+	</$button>
+	<$button to="Contribute Settings" class="tc-btn-invisible tc-float-left">
+		<$transclude $tiddler="$:/core/images/options-button"/>
+	</$button>
+	<$button to="Contribute Help" class="tc-btn-invisible tc-float-left">
+		<$transclude $tiddler="$:/core/images/help"/>
+	</$button>
+
 
 	<$list filter="[<CONTRIBUTION_MAKEPR_STATE>get[text]!is[blank]]">
 		<div class="submission-status">

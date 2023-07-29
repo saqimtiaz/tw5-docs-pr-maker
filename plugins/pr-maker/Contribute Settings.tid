@@ -1,0 +1,13 @@
+title: Contribute Settings
+
+Repository:
+<$select tiddler="$:/config/contribute/createPR/repo/owner" default="">
+<option value="jermolene">Official TW Repository</option>
+<option value="twlinks-ci-test">Test Repository</option>
+</$select>
+
+~GitHub access token:
+<$password name="github-docs-pr"/>
+
+~GitHub username (only needed for signing the CLA):
+<$edit-text tiddler="$:/temp/contribute/gitusername" class="tc-edit-texteditor" tag="input"/>

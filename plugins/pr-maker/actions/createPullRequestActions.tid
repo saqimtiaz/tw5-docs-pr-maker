@@ -2,6 +2,7 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 
 \procedure submitChanges()
 <$action-deletetiddler $tiddler=<<CONTRIBUTION_MAKEPR_STATE>>/>
+<$action-deletetiddler tiddler=<<CONTRIBUTION_LOADPR_STATE>> />
 <$action-sendmessage $message="tm-pr-init" $param=<<CONTRIBUTION_MAKEPR_STATE>>/>
 <$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]]">
 	<$wikify name="data" text={{$:/core/templates/tid-tiddler}}>
