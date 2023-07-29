@@ -72,7 +72,11 @@ title: Submit documentation updates
 			<$list filter="[<CONTRIBUTION_MAKEPR_STATE>has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
 				<$list filter="[<CONTRIBUTION_FORM_STATE>get[pr-isdraft]match[yes]]">
 					<p>
-						Your changes have been saved as a draft on Github at <$text text={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}}/>. Make a note of this URL in order to continue work on your draft at a later time.
+						Your changes have been saved as a draft on Github at:
+						<$macrocall $name="copy-to-clipboard" src={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}} class="tc-float-right"/>
+						<$codeblock code={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}}/>
+						Make a note of this URL in order to continue work on your draft at a later time.
+						<$confetti delay=100/>
 					</p>
 				</$list>
 				<$list filter="[<CONTRIBUTION_FORM_STATE>!has[pr-isdraft]]" variable="null">
