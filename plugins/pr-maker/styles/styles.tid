@@ -1,4 +1,4 @@
-title: $:/styles
+title: $:/$:/plugins/sq/contribute/styles
 tags: $:/tags/Stylesheet
 
 .submit-docs-banner {
@@ -8,6 +8,7 @@ tags: $:/tags/Stylesheet
 	z-index: 1999;
 	display: flex;
 	gap: 1.2em;
+	align-items: center;
 }
 
 .submit-docs-banner .tc-btn-invisible {
