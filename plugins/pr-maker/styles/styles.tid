@@ -6,6 +6,16 @@ tags: $:/tags/Stylesheet
 	right: 1em;
 	bottom: 1em;
 	z-index: 1999;
+	display: flex;
+	gap: 1.2em;
+}
+
+.submit-docs-banner .tc-btn-invisible {
+	fill: #666;
+}
+
+.submit-docs-banner .tc-btn-invisible:hover {
+	fill: #333;
 }
 
 .submit-button {
@@ -23,10 +33,12 @@ tags: $:/tags/Stylesheet
 	text-decoration:none;
 	text-shadow:0px 1px 0px #810e05;
 }
+
 .submit-button:hover {
-	background:linear-gradient(to bottom, #f24437 5%, #c62d1f 100%);
-	background-color:#f24437;
+	background: unset;
+	background-color:#c62d1f;;
 }
+
 .submit-button:active {
 	position:relative;
 	top:1px;
@@ -74,10 +86,11 @@ tags: $:/tags/Stylesheet
 	box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
 }
 
-.submission-form button svg.tc-image-button {
+.submission-form .form-footer button svg.tc-image-button {
 	height: 1.8em;
 	width: 1.8em;
 	fill: #aaa;
+	margin: 0 0.2em;
 }
 
 .submission-form button:hover svg.tc-image-button {
@@ -97,9 +110,9 @@ tags: $:/tags/Stylesheet
 }
 
 .submission-form button.btn-big:not(:disabled):hover {
-    color: #fff;
-    background-color: #0069d9;
-    border-color: #0062cc;
+	color: #fff;
+	background-color: #0069d9;
+	border-color: #0062cc;
 }
 
 .submission-form button.btn-big:not(:disabled) {
@@ -144,3 +157,8 @@ tags: $:/tags/Stylesheet
 	text-align: center;
 }
 */
+
+
+[data-tiddler-title="Submit documentation updates"] .tc-tiddler-controls svg:not(.tc-image-close-button) {
+	display: none;
+}

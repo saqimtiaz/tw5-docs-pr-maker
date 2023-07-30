@@ -2,5 +2,6 @@ title: $:/submit-banner
 tags: $:/tags/PageTemplate
 
 <div class="submit-docs-banner">
-<$button tag="a" class="submit-button" to="Submit documentation updates">Submit updates</$button>
+<$button tag="a" class="submit-button" to="Submit documentation updates" tooltip="Submit your updates">Submit updates</$button>
+<$button tag="a" class="tc-btn-invisible" to="Contribute Help" tooltip="How does this work?"><$transclude $tiddler="$:/core/images/help" size="30pt"/></$button>
 </div>

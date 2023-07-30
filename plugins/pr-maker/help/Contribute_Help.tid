@@ -3,6 +3,8 @@ title: Contribute Help
 \procedure help()
 <$list filter="[<navigateTo>match[walkthrough]]">
 	<!-- start tour -->
+	<$action-deletetiddler $filter="$:/state/tour/step $:/config/ShowTour"/>
+	<$transclude $tiddler="$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step"/>
 </$list>
 \end
 

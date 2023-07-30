@@ -51,28 +51,28 @@ title: Submit documentation updates
 			</div>
 		</$list>
 	</$let>
-
-	<$button
-		actions=<<submitChanges>> 
-		class="btn-big btn-secondary tc-float-right"
-		tooltip="Submit your documentation changes"
-	>
-		Submit documentation update
-	</$button>
-	<$button
-		actions=<<saveDraft>> 
-		class="btn-big tc-float-right"
-		tooltip="Save your changes as a draft on GitHub to continue working on them later"
-	>
-		Save as draft
-	</$button>
-	<$button to="Contribute Settings" class="tc-btn-invisible tc-float-left">
-		<$transclude $tiddler="$:/core/images/options-button"/>
-	</$button>
-	<$button to="Contribute Help" class="tc-btn-invisible tc-float-left">
-		<$transclude $tiddler="$:/core/images/help"/>
-	</$button>
-
+	<div class="form-footer">
+		<$button
+			actions=<<submitChanges>> 
+			class="btn-big btn-secondary tc-float-right"
+			tooltip="Submit your documentation changes"
+		>
+			Submit documentation update
+		</$button>
+		<$button
+			actions=<<saveDraft>> 
+			class="btn-big tc-float-right"
+			tooltip="Save your changes as a draft on GitHub to continue working on them later"
+		>
+			Save as draft
+		</$button>
+		<$button to="Contribute Settings" class="tc-btn-invisible tc-float-left" tooltip="Settings">
+			<$transclude $tiddler="$:/core/images/options-button"/>
+		</$button>
+		<$button to="Contribute Help" class="tc-btn-invisible tc-float-left" tooltip="Help">
+			<$transclude $tiddler="$:/core/images/help"/>
+		</$button>
+	</div>
 
 	<$list filter="[<CONTRIBUTION_MAKEPR_STATE>get[text]!is[blank]]">
 		<div class="submission-status">
@@ -87,12 +87,13 @@ title: Submit documentation updates
 					</p>
 				</$list>
 				<$list filter="[<CONTRIBUTION_FORM_STATE>!has[pr-isdraft]]" variable="null">
-					<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/>{{$:/core/images/open-window}}</a>
+					<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/><!-- <$transclude $tiddler="$:/core/images/open-window" size="13pt"/>--></a>
 					<$list filter="[<currentTiddler>get[status]match[complete]]">
 						<$confetti/>
 						<$confetti delay=300 originY=0.6  spread=100 scalar=1.5/>
 						<$confetti delay=400 originY=0.55 spread=130/>
 						<$confetti delay=500 originY=0.55 spread=170 scalar=2/>
+						<p>If you want to submit another documentation change, please reload this ~TiddlyWiki first.</p>
 					</$list>
 				</$list>
 			</$list>
