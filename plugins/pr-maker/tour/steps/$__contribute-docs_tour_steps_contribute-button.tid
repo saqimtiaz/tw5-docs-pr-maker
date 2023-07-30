@@ -1,10 +1,7 @@
-created: 20230722153011053
 hint: where is the submission form button?
-modified: 20230722163554068
 selector: .submit-docs-banner a
 tags: $:/tags/TourStep
 title: $:/contribute-docs/tour/steps/contribute-button
-type: text/vnd.tiddlywiki
 
 ! Edit and create tiddlers to update the documentation
 

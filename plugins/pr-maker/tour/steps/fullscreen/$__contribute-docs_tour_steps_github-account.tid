@@ -1,10 +1,7 @@
-created: 20230722143606139
 display-mode: fullscreen
-modified: 20230722143813339
 startup-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter $:/plugins/tiddlywiki/tour/steps/tiddlers/Saturn"/>
 tags: $:/tags/TourStep
 title: $:/contribute-docs/tour/steps/github-account
-type: text/vnd.tiddlywiki
 
 \define tour-simplified-tiddler-close-button() yes
 

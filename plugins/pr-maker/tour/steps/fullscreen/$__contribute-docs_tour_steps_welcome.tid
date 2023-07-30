@@ -1,9 +1,6 @@
-created: 20230722142901285
 display-mode: fullscreen
-modified: 20230722142921326
 tags: $:/tags/TourStep
 title: $:/contribute-docs/tour/steps/welcome
-type: text/vnd.tiddlywiki
 startup-actions: <$action-setfield $tiddler="$:/state/tour/step" text=<<currentStep>>/>
 
 ! Contribute to the ~TiddlyWiki documentation

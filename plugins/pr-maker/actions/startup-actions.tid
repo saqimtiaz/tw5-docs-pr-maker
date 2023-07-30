@@ -4,10 +4,10 @@ tags: $:/tags/StartupAction/PostRender
 \procedure get-cla()
 
 \procedure completion()
-<$action-log hello="hello"/>
-    <$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
-        <$action-setfield $tiddler="$:/temp/contribute/cla" text=<<data>>/>
-    </$list>
+\import [[$:/plugins/sq/contribute/variables]]
+<$list filter="[<status>compare:number:gteq[200]compare:number:lteq[299]]" variable="ignore">
+	<$action-setfield $tiddler=<<CLA_TITLE>> text=<<data>>/>
+</$list>
 \end completion
 
 <$action-sendmessage

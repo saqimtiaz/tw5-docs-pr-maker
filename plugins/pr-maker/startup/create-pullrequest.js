@@ -144,10 +144,10 @@ exports.startup = function() {
 			return;
 		}
 		if(!!event.paramObject.successMessage) {
-			pullrequest.lingo.success = paramObject.successMessage;
+			pullrequest.lingo.success = event.paramObject.successMessage;
 		}
 		if(!!event.paramObject.errorMessage) {
-			pullrequest.lingo.error = paramObject.errorMessage;
+			pullrequest.lingo.error = event.paramObject.errorMessage;
 		}
 		createPR();
 	});

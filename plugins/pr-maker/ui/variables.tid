@@ -5,3 +5,8 @@ title: $:/plugins/sq/contribute/variables
 \procedure CONTRIBUTION_LOADPR_STATE() $:/temp/contribute/loadPR/status
 \procedure CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE() $:/temp/contribute/loadPR/formDisplayState
 \procedure CONTRIBUTION_LOADPR_FORM_STATE() $:/temp/contribute/loadPR/formState
+\procedure CLA_TITLE() $:/temp/contribute/cla
+\procedure CLA_SIGNING_STATE() $:/temp/state/signCla
+\procedure CLA_PATH() licenses/cla-individual.md
+\procedure GITHUB_USERNAME_TITLE() $:/temp/contribute/gitUsername
+

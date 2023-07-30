@@ -1,10 +1,6 @@
-created: 20230722143439396
 display-mode: fullscreen
-modified: 20230722143829142
-startup-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter"/>
 tags: $:/tags/TourStep
 title: $:/contribute-docs/tour/steps/requirements
-type: text/vnd.tiddlywiki
 
 ! Requirements
 
