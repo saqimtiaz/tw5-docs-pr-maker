@@ -1,4 +1,4 @@
-title: $:/contribute/startup-actions/cla
+title: $:/plugins/sq/contribute/startup-actions/cla
 tags: $:/tags/StartupAction/PostRender
 
 \procedure get-cla()

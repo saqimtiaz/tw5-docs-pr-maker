@@ -24,7 +24,7 @@ title: Submit documentation updates
 		<h2>Review changes to be submitted:</h2>
 		<p>//(any tiddlers you modify or create are automatically added here)//</p>
 		<h3>Tiddlers created or modified:</h3>
-		{{$:/plugins/sq/makepr/pr-tiddler-list}}
+		{{$:/plugins/sq/contribute/ui/pr-tiddler-list}}
 		<div style="width: 80%">
 			<$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]!is[tiddler]limit[1]]">
 			@@color:red;Some specified tiddlers do not exist. @@
@@ -32,7 +32,7 @@ title: Submit documentation updates
 		</div>
 		<$list filter="[<CONTRIBUTION_FORM_STATE>has[deletedTiddlers]]" variable="null">
 			<h3>Tiddlers that will be deleted:</h3>
-			{{$:/plugins/sq/makepr/pr-deleted-tiddler-list}}
+			{{$:/plugins/sq/contribute/ui/pr-deleted-tiddler-list}}
 		</$list>
 	</div>
 

@@ -1,4 +1,4 @@
-title: $:/plugins/sq/makepr/pr-tiddler-list
+title: $:/plugins/sq/contribute/ui/pr-tiddler-list
 
 \procedure drop-actions()
 <$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="text" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
