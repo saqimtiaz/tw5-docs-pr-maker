@@ -1,6 +1,6 @@
 display-mode: fullscreen
 tags: $:/tags/TourStep
-title: $:/contribute-docs/tour/steps/access-token
+title: $:/plugins/sq/contribute/tour/steps/access-token
 condition: [password-exists[github-docs-pr]match[no]]
 
 ! Access token

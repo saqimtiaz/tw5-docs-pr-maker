@@ -1,6 +1,6 @@
 display-mode: fullscreen
 tags: $:/tags/TourStep
-title: $:/contribute-docs/tour/steps/welcome
+title: $:/plugins/sq/contribute/tour/steps/welcome
 startup-actions: <$action-setfield $tiddler="$:/state/tour/step" text=<<currentStep>>/>
 
 ! Contribute to the ~TiddlyWiki documentation

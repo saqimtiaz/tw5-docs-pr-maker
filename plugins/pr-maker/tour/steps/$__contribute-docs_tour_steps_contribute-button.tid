@@ -1,7 +1,7 @@
 hint: where is the submission form button?
 selector: .submit-docs-banner a
 tags: $:/tags/TourStep
-title: $:/contribute-docs/tour/steps/contribute-button
+title: $:/plugins/sq/contribute/tour/steps/contribute-button
 
 ! Edit and create tiddlers to update the documentation
 

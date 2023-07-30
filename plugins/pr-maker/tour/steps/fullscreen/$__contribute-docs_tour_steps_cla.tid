@@ -1,13 +1,13 @@
 display-mode: fullscreen
 tags: $:/tags/TourStep
-title: $:/contribute-docs/tour/steps/cla
-condition: [{$:/temp/contribute/cla}!is[blank]] :then[{$:/temp/contribute/gitusername}escaperegexp[]addprefix[(?i)@]addsuffix[\b]] :map[{$:/temp/contribute/cla}!regexp<currentTiddler>] :and[!is[blank]] :else[{$:/temp/contribute/gitusername}is[blank]]
+title: $:/plugins/sq/contribute/tour/steps/cla
+condition: [{$:/temp/contribute/cla}!is[blank]] :then[{$:/temp/contribute/gitUsername}escaperegexp[]addprefix[(?i)@]addsuffix[\b]] :map[{$:/temp/contribute/cla}!regexp<currentTiddler>] :and[!is[blank]] :else[{$:/temp/contribute/gitUsername}is[blank]]
 
 \import [[$:/plugins/sq/contribute/variables]]
 \procedure signCla()
 <$let
     originalCLA={{{ [<CLA_TITLE>get[text]] }}}
-    signature=`@${ [{$:/temp/contribute/gitusername}] }$, ${ [<now YYYY/0MM/0DD>] }$`
+    signature=`@${ [{$:/temp/contribute/gitUsername}] }$, ${ [<now YYYY/0MM/0DD>] }$`
     signedCLA=`$(originalCLA)$
 $(signature)$`
 >

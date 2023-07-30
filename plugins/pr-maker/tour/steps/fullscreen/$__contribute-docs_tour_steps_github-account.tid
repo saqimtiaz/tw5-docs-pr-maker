@@ -1,7 +1,6 @@
 display-mode: fullscreen
-startup-actions: <$action-setfield $tiddler="$:/temp/Tour/DemoStoryList" list="$:/plugins/tiddlywiki/tour/steps/tiddlers/Jupiter $:/plugins/tiddlywiki/tour/steps/tiddlers/Saturn"/>
 tags: $:/tags/TourStep
-title: $:/contribute-docs/tour/steps/github-account
+title: $:/plugins/sq/contribute/tour/steps/github-account
 
 \define tour-simplified-tiddler-close-button() yes
 
@@ -13,6 +12,6 @@ If you do not have an account, please create one before continuing.
 
 Please enter your ~GitHub username:
 
-<$edit-text tiddler="$:/temp/contribute/gitusername" class="tc-edit-texteditor" tag="input"/>
+<$edit-text tiddler="$:/temp/contribute/gitUsername" class="tc-edit-texteditor" tag="input"/>
 
 <<tour-buttons>>

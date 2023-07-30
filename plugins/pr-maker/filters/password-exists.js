@@ -1,5 +1,5 @@
 /*\
-title: $:/$:/plugins/sq/contribute/filters/password-exists.js
+title: $:/plugins/sq/contribute/filters/password-exists.js
 type: application/javascript
 module-type: filteroperator
 
