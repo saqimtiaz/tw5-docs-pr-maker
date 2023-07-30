@@ -31,6 +31,7 @@ const updateStatus = function(text,fields) {
 const initPR = function(stateTitle) {
 	pullrequest = Object.create(null);
 	pullrequest.files = Object.create(null);
+	pullrequest.deletedFiles = [];
 	pullrequest.lingo = {
 		"success": "Submission request created.",
 		"error": "There was an error in submitting the update."
@@ -38,8 +39,12 @@ const initPR = function(stateTitle) {
 	pullrequest.stateTitle = stateTitle;
 };
 
-const addToPr = function(path,data) {
-	pullrequest.files[path] = data;
+const addToPr = function(path,data,removeFile) {
+	if(removeFile) {
+		pullrequest.deletedFiles.push(path);
+	} else {
+		pullrequest.files[path] = data;
+	}
 };
 
 async function loadOctokit() {
@@ -49,8 +54,9 @@ async function loadOctokit() {
 		$tw.Octokit = Octokit;
 	}
 	if(!$tw.createPullRequest) {
-		const { createPullRequest} = await import($tw.wiki.getTiddlerText(CREATEPULLREQUEST_URL_TITLE));
+		const { createPullRequest, DELETE_FILE } = await import($tw.wiki.getTiddlerText(CREATEPULLREQUEST_URL_TITLE));
 		$tw.createPullRequest = createPullRequest;
+		$tw.cprDELETEFILE = DELETE_FILE;
 	}
 };
 
@@ -72,6 +78,8 @@ const createPR = async function() {
 			repoOwner = $tw.wiki.getTiddlerText(REPO_OWNER_TITLE),
 			repo = $tw.wiki.getTiddlerText(REPO_TITLE);
 		updateStatus(`Creating submission...`);
+
+		pullrequest.deletedFiles.forEach(file => pullrequest.files[file] = $tw.cprDELETEFILE);
 
 		const pr = await octokit.createPullRequest({
 			//owner of target repo to create PR against
@@ -111,11 +119,12 @@ exports.startup = function() {
 		initPR(event.param);
 	});
 
-	$tw.rootWidget.addEventListener("tm-pr-add",function(event){
+	$tw.rootWidget.addEventListener("tm-pr-add", function(event){
 		let path = event.paramObject.path,
-			data = event.paramObject.data;
-		if(path && data) {
-			addToPr(path,data);
+			data = event.paramObject.data,
+			remove = !!event.paramObject["delete"];
+		if((path && data) || (path && remove)) {
+			addToPr(path,data,remove);
 		}
 	});
 	
@@ -138,7 +147,7 @@ exports.startup = function() {
 			return requiredFields.every(f => pullrequest.metadata.hasOwnProperty(f));
 		};
 
-		if(!pullrequest.metadata || !checkRequiredFields() || !$tw.utils.count(pullrequest.files)) {
+		if(!pullrequest.metadata || !checkRequiredFields() || (!$tw.utils.count(pullrequest.files) && !pullrequest.deletedFiles.length )) {
 			Logger.log("Not enough data to create a PR.");
 			updateStatus("Incomplete data provided to create a PR");
 			return;

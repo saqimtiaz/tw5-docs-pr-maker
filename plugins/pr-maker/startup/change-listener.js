@@ -15,9 +15,11 @@ exports.after = ["startup"];
 
 exports.startup = function() {		
 		$tw.wiki.addEventListener("change",function(changes){
-			var modifiedTiddlers = Object.keys(changes).filter(tiddler => !tiddler.startsWith("$:/") && !changes[tiddler].deleted);
-			if(modifiedTiddlers.length) {
-				$tw.rootWidget.invokeActionsByTag("$:/tags/sq/change-actions",null,{"actionTiddler": $tw.utils.stringifyList(modifiedTiddlers)});
+			var tiddlers = Object.keys(changes),
+				modifiedTiddlers = tiddlers.filter(tiddler => !changes[tiddler].deleted),
+				deletedTiddlers = tiddlers.filter(tiddler => !!changes[tiddler].deleted);
+			if(tiddlers.length) {
+				$tw.rootWidget.invokeActionsByTag("$:/tags/sq/change-actions",null,{"modifiedTiddlers": $tw.utils.stringifyList(modifiedTiddlers), "deletedTiddlers": $tw.utils.stringifyList(deletedTiddlers)});
 			}
 		});
 };

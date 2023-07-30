@@ -4,7 +4,7 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 <$action-deletetiddler $tiddler=<<CONTRIBUTION_MAKEPR_STATE>>/>
 <$action-deletetiddler tiddler=<<CONTRIBUTION_LOADPR_STATE>> />
 <$action-sendmessage $message="tm-pr-init" $param=<<CONTRIBUTION_MAKEPR_STATE>>/>
-<$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]]">
+<$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]is[tiddler]]">
 	<$wikify name="data" text={{$:/core/templates/tid-tiddler}}>
 		<$let
 			path={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>trim:start[../node_modules/tiddlywiki/editions/tw5.com/tiddlers/]] :else[<currentTiddler>addsuffix[.tid]] }}}
@@ -13,6 +13,15 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 			<$action-sendmessage $message="tm-pr-add" path=<<fullPath>> data=<<data>>/>
 		</$let>
 	</$wikify>
+</$list>
+<$list filter="[<CONTRIBUTION_FORM_STATE>get[deletedTiddlers]enlist-input[]]">
+	<$let
+		path={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>trim:start[../node_modules/tiddlywiki/editions/tw5.com/tiddlers/]] }}}
+		fullPath=`editions/tw5.com/tiddlers/$(path)$`
+	>
+		<$action-sendmessage $message="tm-pr-add" path=<<fullPath>> delete="yes"/>
+	</$let>
+</$list>
 </$list>
 <$let pr-body-signature=`
 

@@ -3,6 +3,15 @@ title: $:/plugins/sq/makepr/autotrack-actions
 
 \import [[$:/plugins/sq/contribute/variables]]
 
-<$list filter="[enlist<actionTiddler>!is[draft]] :filter[{$:/config/contribute/trackChanges}match[yes]]" >
-<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="text" $subfilter={{{ [<currentTiddler>format:titlelist[]] }}}/>
+<$list filter="[{$:/config/contribute/trackChanges}match[yes]]" variable="null">
+	<$list filter="[enlist<deletedTiddlers>!is[draft]!is[system]!prefix[Draft of]]">
+		<$list filter="[[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>]" variable="null">
+			<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="deletedTiddlers" $subfilter={{{ [<currentTiddler>format:titlelist[]] }}}/>
+		</$list>
+		<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="text" $subfilter={{{ [<currentTiddler>format:titlelist[]addprefix[-]] }}}/>
+	</$list>
+	<$list filter="[enlist<modifiedTiddlers>!is[draft]!is[system]]" >
+		<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="text" $subfilter={{{ [<currentTiddler>format:titlelist[]] }}}/>
+		<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="deletedTiddlers" $subfilter={{{ [<currentTiddler>format:titlelist[]addprefix[-]] }}}/>
+	</$list>
 </$list>
