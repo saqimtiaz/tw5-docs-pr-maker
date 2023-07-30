@@ -64,6 +64,10 @@ tags: $:/tags/Stylesheet
 	margin-top: 0.2em;
 }
 
+.submission-form h3 {
+	font-weight: 500;
+}
+
 .submission-form .form-group :is(input,textarea) {
 	display: block;
 	width: 100%;

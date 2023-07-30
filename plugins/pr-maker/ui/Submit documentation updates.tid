@@ -32,12 +32,7 @@ title: Submit documentation updates
 		</div>
 		<$list filter="[<CONTRIBUTION_FORM_STATE>has[deletedTiddlers]]" variable="null">
 			<h3>Tiddlers that will be deleted:</h3>
-			<$list filter="[<CONTRIBUTION_FORM_STATE>get[deletedTiddlers]enlist-input[]]" history=<<tv-history-list>> storyview="pop">
-				<div class="tc-sidebar-tab-open-item">
-				<!--	<$macrocall $name="droppable-item"/>-->
-					<$text text=<<currentTiddler>>/>
-				</div>
-			</$list>
+			{{$:/plugins/sq/makepr/pr-deleted-tiddler-list}}
 		</$list>
 	</div>
 

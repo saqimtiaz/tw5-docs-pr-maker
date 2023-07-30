@@ -1,0 +1,35 @@
+title: $:/plugins/sq/makepr/pr-deleted-tiddler-list
+
+\procedure drop-actions()
+<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="text" $subfilter="+[insertbefore:currentTiddler<actionTiddler>]"/>
+\end
+
+\procedure placeholder()
+<div class="tc-droppable-placeholder"/>
+\end
+
+\procedure droppable-item()
+\whitespace trim
+<$droppable actions=<<drop-actions>> enable="yes">
+	<<placeholder>>
+	<div>
+		<$button  tooltip="Remove this tiddler"  class="tc-btn-invisible tc-btn-mini tc-small-gap-right">
+			{{$:/core/images/close-button}}
+			<$action-listops $tiddler=<<CONTRIBUTION_FORM_STATE>> $field="deletedTiddlers" $subfilter="-[<currentTiddler>]"/>
+		</$button><$view field="title"/>
+	</div>
+</$droppable>
+\end
+
+<div class="tc-sidebar-tab-open pr-tiddlers">
+	<$droppable tag="div" actions=<<drop-actions>> enable="yes">
+		<$list filter="[<CONTRIBUTION_FORM_STATE>get[deletedTiddlers]enlist-input[]]" history=<<tv-history-list>> storyview="pop">
+			<div class="tc-sidebar-tab-open-item">
+				<$macrocall $name="droppable-item"/>
+			</div>
+		</$list>
+
+		<div class="tc-droppable-placeholder pr-list-placeholder">
+		</div>
+	</$droppable>
+</div>
