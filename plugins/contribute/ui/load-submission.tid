@@ -3,7 +3,7 @@ title: $:/plugins/sq/contribute/ui/load-Submission
 \procedure loadPR()
 <$action-deletetiddler $tiddler=<<CONTRIBUTION_FORM_STATE>> />
 <$action-deletetiddler tiddler=<<CONTRIBUTION_LOADPR_STATE>> />
-<$let prID={{{ [<CONTRIBUTION_LOADPR_FORM_STATE>get[text]trim:start[https://github.com/Jermolene/TiddlyWiki5/pull/]] }}}>
+<$let prID={{{ [<CONTRIBUTION_LOADPR_FORM_STATE>get[text]split[pull/]last[]trim[/]] }}}>
     <$action-sendmessage $message="tm-loadpr" $param=<<prID>> loadState=<<CONTRIBUTION_LOADPR_STATE>> prState=<<CONTRIBUTION_FORM_STATE>>/>
 </$let>
 \end

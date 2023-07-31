@@ -22,18 +22,18 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 		<$action-sendmessage $message="tm-pr-add" path=<<fullPath>> delete="yes"/>
 	</$let>
 </$list>
-</$list>
 <$let pr-body-signature=`
 
 ---
 <small>Submitted using ${ [{$:/info/url/full}] }$.</small>`
 >
+	<$action-log/>
 	<$action-sendmessage
 		$message="tm-pr-create"
 		$names="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]]"
 		$values="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]] :map[<CONTRIBUTION_FORM_STATE>get<currentTiddler>]"
 		pr-branch={{{ [<CONTRIBUTION_FORM_STATE>get[pr-branch]] :else[<CONTRIBUTION_FORM_STATE>get[pr-title]slugify[]addsuffix[-]addsuffix<now YYYY0MM0DD0hh0mm0ss0XXX>] }}}
-		pr-body=`${[<CONTRIBUTION_FORM_STATE>get[pr-body]]}$ ${[<CONTRIBUTION_FORM_STATE>get[pr-exists]!match[true]then<pr-body-signature>else[]]}$`
+		pr-body=`${[<CONTRIBUTION_FORM_STATE>get[pr-body]]}$ ${[<CONTRIBUTION_FORM_STATE>pr-exists[yes]then[]else<pr-body-signature>]}$`
 	/>
 </$let>
 \end
