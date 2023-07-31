@@ -1,0 +1,44 @@
+query findPR {
+  repository(owner: "twlinks-ci-test", name: "TiddlyWiki5") {
+    pullRequest(number: 389) {
+      isDraft
+      databaseId
+    	id
+    }
+  }
+}
+
+query getUser{
+  viewer {
+    login
+  }
+}
+
+mutation publishDraft {
+  markPullRequestReadyForReview(input: {pullRequestId: "PR_kwDOG7d8685WxgUX" clientMutationId: "tw-contribute-docs"}) {
+		clientMutationId
+    pullRequest {
+		  id
+      isDraft
+		}
+  } 
+}
+
+https://docs.github.com/en/graphql/overview/explorer
+
+
+mutation publishDraft($prid: ID!) {
+  markPullRequestReadyForReview(
+    input: {pullRequestId: $prid, clientMutationId: "tw-contribute-docs"}
+  ) {
+    clientMutationId
+    pullRequest {
+      id
+      isDraft
+    }
+  }
+}
+
+{
+  "prid" : "PR_kwDOG7d8685WxgUX" 
+}

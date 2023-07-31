@@ -105,13 +105,43 @@ const createPR = async function() {
 			],
 			createWhenEmpty: false
 		});
+
+		/*
+		if it was a draft and we are now saying it isnt, then we need to mark it for review
+			How do we know if it was a draft before?
+				submit request button override isdraft field
+				another action to set a publishing_draft field?
+					would need to reset it on succcess
+
+		*/
+
+		/*
+		const graphqlData = await octokit.graphql(
+			`mutation publishDraft($prid: ID!) {
+				markPullRequestReadyForReview(
+				  input: {pullRequestId: $prid, clientMutationId: "tw-contribute-docs"}
+				) {
+				  clientMutationId
+				  pullRequest {
+					id
+					isDraft
+				  }
+				}
+			  }
+			`,{
+				"prid" : pr.data.node_id
+			}
+		);
+		*/
+
 		if(pullrequest.actions) {
-			resultVariables = {
+			let resultVariables = {
 				"pr-id": pr.data.number.toString(),
 				"pr-isdraft": metadata["isdraft"] === "yes" ? "yes" : "no",
 				"pr-exists": "yes",
-				"pr-branch": pr.head.ref,
-				"pr-url": pr.html_url
+				"pr-branch": pr.data.head.ref,
+				"pr-url": pr.data.html_url,
+				"pr-nodeid": pr.data.node_id
 			};
 			$tw.wiki.invokeActionString(pullrequest.actions,undefined,$tw.utils.extend({},resultVariables),{parentWidget: $tw.rootWidget});
 		}
@@ -163,7 +193,7 @@ exports.startup = function() {
 			return;
 		}
 		if(event.paramObject.oncompletion) {
-			pullrequest.actions = oncompletion;
+			pullrequest.actions = event.paramObject.oncompletion;
 		}
 		if(!!event.paramObject.successMessage) {
 			pullrequest.lingo.success = event.paramObject.successMessage;

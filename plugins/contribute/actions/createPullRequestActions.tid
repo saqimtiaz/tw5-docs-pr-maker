@@ -1,13 +1,16 @@
 title: $:/plugins/sq/contribute/createPullRequestActions
 
-
-
 \procedure submitChanges()
 <$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-isdraft="no"/>
-<<creatPullRequest>>
+<<createPullRequest>>
 \end
 
-\procedure creatPullRequest()
+\procedure onCompletion()
+\import [[$:/plugins/sq/contribute/variables]]
+<$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-exists="yes" pr-isdraft=<<pr-isdraft>> pr-branch=<<pr-branch>> pr-url=<<pr-url>> pr-id=<<pr-id>> />
+\end
+
+\procedure createPullRequest()
 <$action-deletetiddler $tiddler=<<CONTRIBUTION_MAKEPR_STATE>>/>
 <$action-deletetiddler tiddler=<<CONTRIBUTION_LOADPR_STATE>> />
 <$action-sendmessage $message="tm-pr-init" $param=<<CONTRIBUTION_MAKEPR_STATE>>/>
@@ -41,6 +44,7 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 		$values="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]] :map[<CONTRIBUTION_FORM_STATE>get<currentTiddler>]"
 		pr-branch={{{ [<CONTRIBUTION_FORM_STATE>get[pr-branch]] :else[<CONTRIBUTION_FORM_STATE>get[pr-title]slugify[]addsuffix[-]addsuffix<now YYYY0MM0DD0hh0mm0ss0XXX>] }}}
 		pr-body=`${[<CONTRIBUTION_FORM_STATE>get[pr-body]]}$ ${[<CONTRIBUTION_FORM_STATE>pr-exists[yes]then[]else<pr-body-signature>]}$`
+		oncompletion=<<onCompletion>>
 	/>
 </$let>
 \end
@@ -48,5 +52,5 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 \procedure saveDraft()
 \procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-isdraft="yes"/>
-<<creatPullRequest>>
+<<createPullRequest>>
 \end

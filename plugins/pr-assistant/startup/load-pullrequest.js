@@ -132,7 +132,8 @@ async function loadPR(pr_id) {
 			"pr-branch": pr.head.ref,
 			"pr-exists": "yes",
 			"pr-id": pr_id,
-			"pr-isdraft": pr.draft ? "yes" : "no"
+			"pr-isdraft": pr.draft ? "yes" : "no",
+			"pr-nodeid": pr.node_id
 		};
 
 		Logger.log("PR exists");
