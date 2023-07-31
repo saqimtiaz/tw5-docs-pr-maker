@@ -1,6 +1,13 @@
 title: $:/plugins/sq/contribute/createPullRequestActions
 
+
+
 \procedure submitChanges()
+<$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-isdraft="no"/>
+<<creatPullRequest>>
+\end
+
+\procedure creatPullRequest()
 <$action-deletetiddler $tiddler=<<CONTRIBUTION_MAKEPR_STATE>>/>
 <$action-deletetiddler tiddler=<<CONTRIBUTION_LOADPR_STATE>> />
 <$action-sendmessage $message="tm-pr-init" $param=<<CONTRIBUTION_MAKEPR_STATE>>/>
@@ -41,5 +48,5 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 \procedure saveDraft()
 \procedure tv-action-refresh-policy() always
 <$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-isdraft="yes"/>
-<<submitChanges>>
+<<creatPullRequest>>
 \end

@@ -91,7 +91,7 @@ title: Submit documentation updates
 						<$confetti delay=100/>
 					</p>
 				</$list>
-				<$list filter="[<CONTRIBUTION_FORM_STATE>!has[pr-isdraft]]" variable="null">
+				<$list filter="[<CONTRIBUTION_FORM_STATE>!pr-isdraft[yes]]" variable="null">
 					<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/><!-- <$transclude $tiddler="$:/core/images/open-window" size="13pt"/>--></a>
 					<$list filter="[<currentTiddler>get[status]match[complete]]">
 						<$confetti/>

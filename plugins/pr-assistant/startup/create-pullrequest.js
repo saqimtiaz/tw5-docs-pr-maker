@@ -105,6 +105,16 @@ const createPR = async function() {
 			],
 			createWhenEmpty: false
 		});
+		if(pullrequest.actions) {
+			resultVariables = {
+				"pr-id": pr.data.number.toString(),
+				"pr-isdraft": metadata["isdraft"] === "yes" ? "yes" : "no",
+				"pr-exists": "yes",
+				"pr-branch": pr.head.ref,
+				"pr-url": pr.html_url
+			};
+			$tw.wiki.invokeActionString(pullrequest.actions,undefined,$tw.utils.extend({},resultVariables),{parentWidget: $tw.rootWidget});
+		}
 		updateStatus(pullrequest.lingo.success,{link: `https://github.com/${repoOwner}/${repo}/pull/${pr.data.number}`, status: "complete"});
 	} catch (err) {
 		updateStatus(`${pullrequest.lingo.error} ${err}`);
@@ -151,6 +161,9 @@ exports.startup = function() {
 			Logger.log("Not enough data to create a PR.");
 			updateStatus("Incomplete data provided to create a PR");
 			return;
+		}
+		if(event.paramObject.oncompletion) {
+			pullrequest.actions = oncompletion;
 		}
 		if(!!event.paramObject.successMessage) {
 			pullrequest.lingo.success = event.paramObject.successMessage;
