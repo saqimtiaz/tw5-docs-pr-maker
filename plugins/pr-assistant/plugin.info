@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/sq/github-pr-assistant",
+	"name": "GitHub PR Assistant",
+	"description": "Contribute on GitHub without understanding git",
+	"list": "readme",
+	"version": "1.0.0"
+}

@@ -1,0 +1,10 @@
+display-mode: fullscreen
+tags: $:/tags/TourStep
+title: $:/plugins/sq/contribute/tour/steps/how-does-it-work
+
+!How does this work?
+
+# You edit and create tiddlers in this special version of tiddlywiki.com
+# With a click of a button, they are submitted as a contribution in your name (on Github)
+
+<<tour-buttons>>

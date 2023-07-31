@@ -1,0 +1,12 @@
+display-mode: fullscreen
+tags: $:/tags/TourStep
+title: $:/plugins/sq/contribute/tour/steps/requirements
+
+! Requirements
+
+In order for your contributions to be submitted on your behalf, you will need:
+
+* a [[GitHub|https://github.com/]] account
+* a ~GitHub access token: you will be guided in creating one
+
+<<tour-buttons>>

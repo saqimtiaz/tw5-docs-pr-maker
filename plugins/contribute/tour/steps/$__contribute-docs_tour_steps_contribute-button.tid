@@ -1,0 +1,10 @@
+hint: where is the submission form button?
+selector: .submit-docs-banner a
+tags: $:/tags/TourStep
+title: $:/plugins/sq/contribute/tour/steps/contribute-button
+
+! Edit and create tiddlers to update the documentation
+
+Once you are ready to submit your work, open the submission form using the button in the bottom right corner.
+
+In this form you can review which tiddlers will be submitted, and provide a short description of your changes.

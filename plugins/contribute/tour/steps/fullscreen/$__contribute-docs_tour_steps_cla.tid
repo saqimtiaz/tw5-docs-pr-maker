@@ -1,0 +1,56 @@
+display-mode: fullscreen
+tags: $:/tags/TourStep
+title: $:/plugins/sq/contribute/tour/steps/cla
+condition: [{$:/temp/contribute/cla}!is[blank]] :then[{$:/temp/contribute/gitUsername}escaperegexp[]addprefix[(?i)@]addsuffix[\b]] :map[{$:/temp/contribute/cla}!regexp<currentTiddler>] :and[!is[blank]] :else[{$:/temp/contribute/gitUsername}is[blank]]
+
+\import [[$:/plugins/sq/contribute/variables]]
+\procedure signCla()
+<$let
+    originalCLA={{{ [<CLA_TITLE>get[text]] }}}
+    signature=`@${ [{$:/temp/contribute/gitUsername}] }$, ${ [<now YYYY/0MM/0DD>] }$`
+    signedCLA=`$(originalCLA)$
+$(signature)$`
+>
+    <$action-deletetiddler tiddler=<<CLA_SIGNING_STATE>> />
+    <$action-sendmessage $message="tm-pr-init" $param=<<CLA_SIGNING_STATE>>/>
+    <$action-sendmessage $message="tm-pr-add" path=<<CLA_PATH>> data=<<signedCLA>>/>
+    <$action-sendmessage
+		$message="tm-pr-create"
+        successMessage="Request to sign CLA created"
+        errorMessage="There was an error attempting to sign the CLA"
+		pr-branch={{{ [[Signing-CLA-]addsuffix<now YYYY0MM0DD0hh0mm0ss0XXX>] }}}
+        pr-title="Signing CLA"
+		pr-body=`Signing CLA
+
+---
+<small>Submitted using ${ [{$:/info/url/full}] }$.</small>`
+	/>
+</$let>
+\end
+
+! Contributor License Agreement
+
+It looks like this is the first time you are contributing to ~TiddlyWiki5. Welcome! 
+
+Like other ~OpenSource projects, ~TiddlyWiki5 needs a signed contributor license agreement (CLA) from individual contributors.
+
+This is a legal agreement that allows contributors to assert that they own the copyright of their contribution, and that they agree to license it to the ~UnaMesa Association (the legal entity that owns TiddlyWiki on behalf of the community).
+
+Please [[read the CLA|https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-com/licenses/cla-individual.md]] and confirm below that you wish to sign it. You only have to do this once!
+
+<$list filter="[{$:/temp/contribute/gitusername}!is[blank]]" variable="null" emptyMessage="""<p class="tc-error" style="padding:0.5em;">Please provide your ~GitHub username in the previous steps in order to sign the CLA.</p>""">
+<$button class="tc-btn-big-green" actions=<<signCla>> >Sign the CLA
+</$button>
+
+<$list filter="[<CLA_SIGNING_STATE>] :filter[get[text]!is[blank]]">
+<div class="submission-status">
+<$list filter="[<CLA_SIGNING_STATE>has[link]]" emptyMessage="""<$text text={{!!text}}/>""">
+<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$transclude/></a>
+<p>You may continue</p>
+</$list>
+</div>
+</$list>
+
+</$list>
+
+<<tour-buttons>>

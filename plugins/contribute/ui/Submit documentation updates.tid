@@ -1,0 +1,112 @@
+title: Submit documentation updates
+
+\import [[$:/plugins/sq/contribute/variables]] [[$:/plugins/sq/contribute/createPullRequestActions]]
+
+\define inputActions()
+<$action-deletetiddler $tiddler=<<CONTRIBUTION_MAKEPR_STATE>>/>
+\end
+
+\procedure bluractions()
+<$action-setfield $tiddler="$:/temp/refresh-token-status" text="yes"/>
+\end
+
+<div class="submission-form">
+
+	<$button set=<<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>> setTo={{{ [<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>get[text]match[show]then[hide]else[show]] }}} tooltip="Load and resume work on a saved submission" class="btn-big btn-muted tc-float-right">
+		Load a saved submission? <!--<$transclude tiddler={{{[<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>get[text]match[show]then[$:/core/images/up-arrow]else[$:/core/images/down-arrow]]}}} />-->
+	</$button>
+	
+	<$reveal type="match" state=<<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>> text="show" tag="div" class="form-group" retain="yes" animate="yes">
+		{{$:/plugins/sq/contribute/ui/load-Submission}}
+	</$reveal>
+
+	<div class="form-group">
+		<h2>Review changes to be submitted:</h2>
+		<div>//(any tiddlers you modify or create are automatically added here)//</div>
+		<h3>Tiddlers created or modified:</h3>
+		{{$:/plugins/sq/contribute/ui/pr-tiddler-list}}
+		<div style="width: 80%">
+			<$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]!is[tiddler]limit[1]]">
+			@@color:red;Some specified tiddlers do not exist. @@
+			</$list>
+		</div>
+		<$list filter="[<CONTRIBUTION_FORM_STATE>has[deletedTiddlers]]" variable="null">
+			<h3>Tiddlers that will be deleted:</h3>
+			{{$:/plugins/sq/contribute/ui/pr-deleted-tiddler-list}}
+		</$list>
+	</div>
+
+	<div class="form-group">
+		<h2>Provide a title and description for your changes:</h2>
+		<label>Title:
+			<$edit-text tiddler=<<CONTRIBUTION_FORM_STATE>> field="pr-title" default="" tag="input" class="tc-edit-texteditor" inputActions=<<inputActions>>/>
+		</label>
+		<label>Description:
+			<$edit-text tiddler=<<CONTRIBUTION_FORM_STATE>> field="pr-body" default="" tag="textarea" class="tc-edit-texteditor"/>
+		</label>
+	</div>
+
+	<$let null={{$:/temp/refresh-token-status}}>
+		<$list filter="[password-exists[github-docs-pr]match[no]]">
+			<div class="form-group error-missing-token">
+				<h2>Provide a [[GitHub authentication token|https://github.com/settings/tokens/new?scopes=public_repo]]:</h2>
+				<$eventcatcher $focusout=<<bluractions>> selector="input" tag="span">
+					<$password name="github-docs-pr"/>
+				</$eventcatcher>
+			</div>
+		</$list>
+	</$let>
+	<div class="form-footer">
+		<$button
+			actions=<<submitChanges>> 
+			class="btn-big btn-secondary tc-float-right"
+			tooltip="Submit your documentation changes"
+		>
+			Submit documentation update
+		</$button>
+		<$button
+			actions=<<saveDraft>> 
+			class="btn-big tc-float-right"
+			tooltip="Save your changes as a draft on GitHub to continue working on them later"
+		>
+			Save as draft
+		</$button>
+		<$button to="Contribute Settings" class="tc-btn-invisible tc-float-left" tooltip="Settings">
+			<$transclude $tiddler="$:/core/images/options-button"/>
+		</$button>
+		<$button to="Contribute Help" class="tc-btn-invisible tc-float-left" tooltip="Help">
+			<$transclude $tiddler="$:/core/images/help"/>
+		</$button>
+	</div>
+
+	<$list filter="[<CONTRIBUTION_MAKEPR_STATE>get[text]!is[blank]]">
+		<div class="submission-status">
+			<$list filter="[<CONTRIBUTION_MAKEPR_STATE>has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">
+				<$list filter="[<CONTRIBUTION_FORM_STATE>get[pr-isdraft]match[yes]]">
+					<p>
+						Your changes have been <a href={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer">saved as a draft</a> on Github at:
+						<$macrocall $name="copy-to-clipboard" src={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}} class="tc-float-right"/>
+						<$codeblock code={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}}/>
+						Make a note of this URL in order to continue work on your draft at a later time.
+						<$confetti delay=100/>
+					</p>
+				</$list>
+				<$list filter="[<CONTRIBUTION_FORM_STATE>!has[pr-isdraft]]" variable="null">
+					<a href={{!!link}} class="tc-tiddlylink-external" target="_blank" rel="noopener noreferrer"><$text text={{{[<currentTiddler>get[text]]}}}/><!-- <$transclude $tiddler="$:/core/images/open-window" size="13pt"/>--></a>
+					<$list filter="[<currentTiddler>get[status]match[complete]]">
+						<$confetti/>
+						<$confetti delay=300 originY=0.6  spread=100 scalar=1.5/>
+						<$confetti delay=400 originY=0.55 spread=130/>
+						<$confetti delay=500 originY=0.55 spread=170 scalar=2/>
+						<p>If you want to submit other documentation changes, please reload this ~TiddlyWiki first.</p>
+						
+						<p>If you need to make further changes to the documentation update you just submitted, reload this wiki and then use the "Load a saved a submission?" button at the top of this form and enter the URL:
+						<$macrocall $name="copy-to-clipboard" src={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}} class="tc-float-right"/>
+						<$codeblock code={{{[<CONTRIBUTION_MAKEPR_STATE>get[link]]}}}/>
+						</p>
+					</$list>
+				</$list>
+			</$list>
+		</div>
+	</$list>
+</div>

@@ -1,0 +1,45 @@
+title: $:/plugins/sq/contribute/createPullRequestActions
+
+\procedure submitChanges()
+<$action-deletetiddler $tiddler=<<CONTRIBUTION_MAKEPR_STATE>>/>
+<$action-deletetiddler tiddler=<<CONTRIBUTION_LOADPR_STATE>> />
+<$action-sendmessage $message="tm-pr-init" $param=<<CONTRIBUTION_MAKEPR_STATE>>/>
+<$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]is[tiddler]]">
+	<$wikify name="data" text={{$:/core/templates/tid-tiddler}}>
+		<$let
+			path={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>trim:start[../node_modules/tiddlywiki/editions/tw5.com/tiddlers/]] :else[<currentTiddler>addsuffix[.tid]] }}}
+			fullPath=`editions/tw5.com/tiddlers/$(path)$`
+		>
+			<$action-sendmessage $message="tm-pr-add" path=<<fullPath>> data=<<data>>/>
+		</$let>
+	</$wikify>
+</$list>
+<$list filter="[<CONTRIBUTION_FORM_STATE>get[deletedTiddlers]enlist-input[]]">
+	<$let
+		path={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>trim:start[../node_modules/tiddlywiki/editions/tw5.com/tiddlers/]] }}}
+		fullPath=`editions/tw5.com/tiddlers/$(path)$`
+	>
+		<$action-sendmessage $message="tm-pr-add" path=<<fullPath>> delete="yes"/>
+	</$let>
+</$list>
+</$list>
+<$let pr-body-signature=`
+
+---
+<small>Submitted using ${ [{$:/info/url/full}] }$.</small>`
+>
+	<$action-sendmessage
+		$message="tm-pr-create"
+		$names="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]]"
+		$values="[<CONTRIBUTION_FORM_STATE>fields[]prefix[pr]] :map[<CONTRIBUTION_FORM_STATE>get<currentTiddler>]"
+		pr-branch={{{ [<CONTRIBUTION_FORM_STATE>get[pr-branch]] :else[<CONTRIBUTION_FORM_STATE>get[pr-title]slugify[]addsuffix[-]addsuffix<now YYYY0MM0DD0hh0mm0ss0XXX>] }}}
+		pr-body=`${[<CONTRIBUTION_FORM_STATE>get[pr-body]]}$ ${[<CONTRIBUTION_FORM_STATE>get[pr-exists]!match[true]then<pr-body-signature>else[]]}$`
+	/>
+</$let>
+\end
+
+\procedure saveDraft()
+\procedure tv-action-refresh-policy() always
+<$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-isdraft="yes"/>
+<<submitChanges>>
+\end

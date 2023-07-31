@@ -1,0 +1,17 @@
+display-mode: fullscreen
+tags: $:/tags/TourStep
+title: $:/plugins/sq/contribute/tour/steps/github-account
+
+\define tour-simplified-tiddler-close-button() yes
+
+! ~GitHub account
+
+In order for your contributions to be submitted to the ~TiddlyWiki project, you will need a [[GitHub|https://github.com/]] account.
+
+If you do not have an account, please create one before continuing. 
+
+Please enter your ~GitHub username:
+
+<$edit-text tiddler="$:/temp/contribute/gitUsername" class="tc-edit-texteditor" tag="input"/>
+
+<<tour-buttons>>
