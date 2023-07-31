@@ -64,7 +64,7 @@ async function loadOctokit() {
 	}
 };
 
-async function loadPR(pr_id) {
+async function loadPR(pr_number) {
 
 	async function getBlob(octokit,sha) {
 		updateStatus("Loading the PR files...");
@@ -80,12 +80,12 @@ async function loadPR(pr_id) {
 		return $tw.utils.base64Decode(blob.data.content);
 	};
 	
-	async function getPR(pr_id) {
+	async function getPR(pr_number) {
 		updateStatus("Finding the PR...")
-		const pr = await octokit.request(`GET /repos/${repoOwner}/${repo}/pulls/${pr_id}`, {
+		const pr = await octokit.request(`GET /repos/${repoOwner}/${repo}/pulls/${pr_number}`, {
 			owner: repoOwner,
 			repo: repo,
-			pull_number: `${pr_id}`,
+			pull_number: `${pr_number}`,
 			headers: {
 			  'X-GitHub-Api-Version': '2022-11-28'
 			}
@@ -97,12 +97,12 @@ async function loadPR(pr_id) {
 		return pr.data;
 	};
 
-	async function getFilesForPR(pr_id) {
+	async function getFilesForPR(pr_number) {
 		updateStatus("Finding the changes for the PR...")
-		return await octokit.request(`GET /repos/${repoOwner}/${repo}/pulls/${pr_id}/files`, {
+		return await octokit.request(`GET /repos/${repoOwner}/${repo}/pulls/${pr_number}/files`, {
 			owner: repoOwner,
 			repo: repo,
-			pull_number: `${pr_id}`,
+			pull_number: `${pr_number}`,
 			headers: {
 				'X-GitHub-Api-Version': '2022-11-28'
 			}
@@ -123,7 +123,7 @@ async function loadPR(pr_id) {
 			auth: TOKEN
 		});
 
-		const pr = await getPR(pr_id);
+		const pr = await getPR(pr_number);
 
 		const pr_metadata = {
 			"pr-title": pr.title,
@@ -131,14 +131,14 @@ async function loadPR(pr_id) {
 			"pr-url": pr.html_url,
 			"pr-branch": pr.head.ref,
 			"pr-exists": "yes",
-			"pr-id": pr_id,
+			"pr-number": pr_number,
 			"pr-isdraft": pr.draft ? "yes" : "no",
 			"pr-nodeid": pr.node_id
 		};
 
 		Logger.log("PR exists");
 	
-		const fileObjects = await getFilesForPR(pr_id);
+		const fileObjects = await getFilesForPR(pr_number);
 		Logger.log(`got file info for ${fileObjects.data.length} files`);
 	
 		let filePromises = [];
@@ -162,13 +162,13 @@ async function loadPR(pr_id) {
 exports.startup = async function() {
 	Logger = new $tw.utils.Logger("load-pullrequest");
 	$tw.rootWidget.addEventListener("tm-loadpr",function(event){
-		var pr_id = event.param;
+		var pr_number = event.param;
 		stateTitle = event.paramObject && event.paramObject.loadState,
 		prStateTitle = event.paramObject && event.paramObject.prState;
-		if(!pr_id || ! stateTitle || !prStateTitle) {
+		if(!pr_number || ! stateTitle || !prStateTitle) {
 			return;
 		}
-		loadPR(pr_id);
+		loadPR(pr_number);
 	});
 };
 

@@ -143,7 +143,7 @@ const createPR = async function() {
 
 		if(pullrequest.actions) {
 			let resultVariables = {
-				"pr-id": pr.data.number.toString(),
+				"pr-number": pr.data.number.toString(),
 				"pr-isdraft": metadata["isdraft"] === "yes" ? "yes" : "no", //XXXX
 				"pr-exists": "yes",
 				"pr-branch": pr.data.head.ref,

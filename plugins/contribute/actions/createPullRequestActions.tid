@@ -7,7 +7,7 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 
 \procedure onCompletion()
 \import [[$:/plugins/sq/contribute/variables]]
-<$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-exists="yes" pr-isdraft=<<pr-isdraft>> pr-branch=<<pr-branch>> pr-url=<<pr-url>> pr-id=<<pr-id>> />
+<$action-setfield $tiddler=<<CONTRIBUTION_FORM_STATE>> pr-exists="yes" pr-isdraft=<<pr-isdraft>> pr-branch=<<pr-branch>> pr-url=<<pr-url>> pr-number=<<pr-number>> />
 \end
 
 \procedure createPullRequest()
