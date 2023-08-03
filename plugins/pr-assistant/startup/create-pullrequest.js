@@ -77,7 +77,7 @@ const createPR = async function() {
 		const prUserBranch = metadata["branch"],
 			repoOwner = $tw.wiki.getTiddlerText(REPO_OWNER_TITLE),
 			repo = $tw.wiki.getTiddlerText(REPO_TITLE);
-		updateStatus(`Creating submission...`);
+		updateStatus(`Creating submission...`,{status:"inprogress"});
 
 		pullrequest.deletedFiles.forEach(file => pullrequest.files[file] = $tw.cprDELETEFILE);
 
@@ -154,7 +154,7 @@ const createPR = async function() {
 		}
 		updateStatus(pullrequest.lingo.success,{link: `https://github.com/${repoOwner}/${repo}/pull/${pr.data.number}`, status: "complete"});
 	} catch (err) {
-		updateStatus(`${pullrequest.lingo.error} ${err}`);
+		updateStatus(`${pullrequest.lingo.error} ${err}`,{status: "error"});
 	}
 };
 
@@ -196,7 +196,7 @@ exports.startup = function() {
 
 		if(!pullrequest.metadata || !checkRequiredFields() || (!$tw.utils.count(pullrequest.files) && !pullrequest.deletedFiles.length )) {
 			Logger.log("Not enough data to create a PR.");
-			updateStatus("Incomplete data provided to create a PR");
+			updateStatus("Incomplete data provided to create a PR",{status:"error"});
 			return;
 		}
 		if(event.paramObject.oncompletion) {

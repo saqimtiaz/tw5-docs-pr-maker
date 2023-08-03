@@ -8,12 +8,16 @@ title: $:/plugins/sq/contribute/ui/load-Submission
 </$let>
 \end
 
+\function disabled()
+[<CONTRIBUTION_LOADPR_STATE>is[tiddler]!status[error]then[yes]]
+\end
+
 <h2>Load a previous submission:</h2>
 <label>Enter the ~GitHub URL for the previous submission that you want to load for further work:
 	<$edit-text tiddler=<<CONTRIBUTION_LOADPR_FORM_STATE>> default="" tag="input" class="tc-edit-texteditor"/>
 </label>
 <small>Example: <$text text="https://github.com/Jermolene/TiddlyWiki5/pull/6191"/></small>
-<$button actions=<<loadPR>> class="tc-float-right btn-big">Load</$button>
+<$button actions=<<loadPR>> class="tc-float-right btn-big" disabled=<<disabled>>>Load</$button>
 <$list filter="[<CONTRIBUTION_LOADPR_STATE>get[text]!is[blank]]">
     <div class="submission-status">
         <$text text=<<currentTiddler>>/>

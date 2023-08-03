@@ -155,7 +155,7 @@ async function loadPR(pr_number) {
 			updateStatus("The submission has been loaded. You can make further changes and submit them.",{status: "complete"});
 		}
 	} catch (err) {
-		updateStatus(`There was an error loading the pull request ${err}.`);
+		updateStatus(`There was an error loading the pull request ${err}.`,{status: "error"});
 	}
 };
 

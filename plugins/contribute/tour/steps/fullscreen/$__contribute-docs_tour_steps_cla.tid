@@ -27,6 +27,9 @@ $(signature)$`
 	/>
 </$let>
 \end
+\function disabled()
+[<CLA_SIGNING_STATE>is[tiddler]!status[error]then[yes]]
+\end
 
 ! Contributor License Agreement
 
@@ -38,8 +41,8 @@ This is a legal agreement that allows contributors to assert that they own the c
 
 Please [[read the CLA|https://github.com/Jermolene/TiddlyWiki5/blob/tiddlywiki-com/licenses/cla-individual.md]] and confirm below that you wish to sign it. You only have to do this once!
 
-<$list filter="[{$:/temp/contribute/gitusername}!is[blank]]" variable="null" emptyMessage="""<p class="tc-error" style="padding:0.5em;">Please provide your ~GitHub username in the previous steps in order to sign the CLA.</p>""">
-<$button class="tc-btn-big-green" actions=<<signCla>> >Sign the CLA
+<$list filter="[<GITHUB_USERNAME_TITLE>get[text]!is[blank]]" variable="null" emptyMessage="""<p class="tc-error" style="padding:0.5em;">Please provide your ~GitHub username in the previous steps in order to sign the CLA.</p>""">
+<$button class="tc-btn-big-green" actions=<<signCla>> disabled=<<disabled>> >Sign the CLA
 </$button>
 
 <$list filter="[<CLA_SIGNING_STATE>] :filter[get[text]!is[blank]]">

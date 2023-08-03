@@ -10,6 +10,14 @@ title: Submit documentation updates
 <$action-setfield $tiddler="$:/temp/refresh-token-status" text="yes"/>
 \end
 
+\function has.payload()
+[get[text]!is[blank]enlist-input[]is[tiddler]] [has[deletedTiddlers]]
+\end
+
+\function disabled()
+[<CONTRIBUTION_FORM_STATE>has[pr-title]has[pr-body]has.payload[]] :then[<CONTRIBUTION_MAKEPR_STATE>!status[inprogress]then[no]else[yes]] :else[[yes]]
+\end
+
 <div class="submission-form">
 
 	<$button set=<<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>> setTo={{{ [<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>get[text]match[show]then[hide]else[show]] }}} tooltip="Load and resume work on a saved submission" class="btn-big btn-muted tc-float-right">
@@ -61,6 +69,7 @@ title: Submit documentation updates
 			actions=<<submitChanges>> 
 			class="btn-big btn-secondary tc-float-right"
 			tooltip="Submit your documentation changes"
+			disabled=<<disabled>>
 		>
 			Submit documentation update
 		</$button>
@@ -68,6 +77,7 @@ title: Submit documentation updates
 			actions=<<saveDraft>> 
 			class="btn-big tc-float-right"
 			tooltip="Save your changes as a draft on GitHub to continue working on them later"
+			disabled=<<disabled>>
 		>
 			Save as draft
 		</$button>
