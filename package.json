@@ -1,14 +1,19 @@
 {
-  "name": "twdocs-pr-maker",
+  "name": "tw-contribute",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-      "build": "cp -fr ./tiddlers ./node_modules/tiddlywiki/editions/tw5.com/tiddlers  && npx tiddlywiki node_modules/tiddlywiki/editions/tw5.com --output ./output --build index"
+    "build": "cp -fr ./tiddlers ./node_modules/tiddlywiki/editions/tw5.com/tiddlers  && npx tiddlywiki node_modules/tiddlywiki/editions/tw5.com --output ./output --build index",
+    "dev": "npx nodemon -e tid,multids,js,info --watch plugins ./node_modules/tiddlywiki/tiddlywiki.js . --listen port=8765"
   },
   "author": "",
   "license": "BSD",
   "dependencies": {
     "tiddlywiki": "^5.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "npx": "^10.2.2"
   }
 }

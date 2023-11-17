@@ -1,0 +1,2 @@
+list: $:/plugins/sq/contribute/tour/steps/welcome $:/plugins/sq/contribute/tour/steps/how-does-it-work $:/plugins/sq/contribute/tour/steps/requirements $:/plugins/sq/contribute/tour/steps/github-account $:/plugins/sq/contribute/tour/steps/access-token $:/plugins/sq/contribute/tour/steps/cla $:/plugins/sq/contribute/tour/steps/end-of-fullscreen $:/plugins/sq/contribute/tour/steps/tracking $:/plugins/sq/contribute/tour/steps/contribute-button
+title: $:/tags/TourStep

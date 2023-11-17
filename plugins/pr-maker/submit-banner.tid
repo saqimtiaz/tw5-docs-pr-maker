@@ -1,6 +1,0 @@
-title: $:/submit-banner
-tags: $:/tags/PageTemplate
-
-<div class="submit-docs-banner">
-<$button tag="a" class="submit-button" to="Submit documentation updates">Submit updates</$button>
-</div>

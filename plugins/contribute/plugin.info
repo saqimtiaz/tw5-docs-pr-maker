@@ -1,0 +1,6 @@
+{
+	"title": "$:/plugins/sq/contribute",
+	"name": "Contribute",
+	"description": "Submit documentation contributions",
+	"list": "readme"
+}

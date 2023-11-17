@@ -1,0 +1,15 @@
+display-mode: fullscreen
+tags: $:/tags/TourStep
+title: $:/plugins/sq/contribute/tour/steps/welcome
+startup-actions: <$action-setfield $tiddler="$:/state/tour/step" text=<<currentStep>>/>
+
+! Contribute to the ~TiddlyWiki documentation
+
+!!!This a special version of tiddlywiki.com designed to help you contribute to and improve the documentation.
+
+<<tour-buttons>>
+<!--
+<p style="text-align:center;">
+<$button set="$:/config/ShowTour" setTo="no" class="tc-btn-invisible tc-btn-big-green" tooltip="exit tour"><span style="fill:#bbb;">I know what to do<br>skip the instructions</span></$button>
+</p>
+-->

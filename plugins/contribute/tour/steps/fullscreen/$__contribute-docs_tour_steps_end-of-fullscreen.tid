@@ -1,0 +1,11 @@
+display-mode: fullscreen
+tags: $:/tags/TourStep
+title: $:/plugins/sq/contribute/tour/steps/end-of-fullscreen
+
+! Congratulations!
+
+You have everything in place to start editing and creating documentation.
+
+Now we are going guide you through submitting your contributions.
+
+<<tour-buttons>>

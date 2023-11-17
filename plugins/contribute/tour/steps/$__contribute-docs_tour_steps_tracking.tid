@@ -1,0 +1,9 @@
+tags: $:/tags/TourStep
+title: $:/plugins/sq/contribute/tour/steps/tracking
+type: text/vnd.tiddlywiki
+
+! Edit and create tiddlers to update the documentation
+
+The wiki will keep track of all tiddlers that you create or modify so that you can easily submit them once you have finished editing.
+
+<<tour-buttons>>

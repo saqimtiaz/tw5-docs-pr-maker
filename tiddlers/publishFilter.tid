@@ -1,0 +1,4 @@
+title: $:/publishFilter
+tags: $:/tags/Macro
+
+\procedure publishFilter() -[[$:/config/ShowTour]]
