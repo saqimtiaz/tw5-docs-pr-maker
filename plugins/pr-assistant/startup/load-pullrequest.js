@@ -58,9 +58,7 @@ function savePRMetadata(data) {
 
 async function loadOctokit() {
 	if(!$tw.Octokit) {
-		updateStatus(`loading external library`);
-		const { Octokit } = await import($tw.wiki.getTiddlerText(OCTOKIT_URL_TILE));
-		$tw.Octokit = Octokit;
+		$tw.Octokit = require("$:/plugins/sq/github-pr-assistant/octokit.js").Octokit;
 	}
 };
 

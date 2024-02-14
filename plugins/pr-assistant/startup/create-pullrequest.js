@@ -13,9 +13,7 @@ exports.name = "contribute-createpr-handler";
 exports.platforms = ["browser"];
 exports.after = ["startup"];
 
-const OCTOKIT_URL_TILE = "$:/config/github-pr-assistant/octokit/url",
-	CREATEPULLREQUEST_URL_TITLE = "$:/config/github-pr-assistant/octokit/createPullRequest/url",
-	REPO_OWNER_TITLE = "$:/config/github-pr-assistant/repo/owner",
+const REPO_OWNER_TITLE = "$:/config/github-pr-assistant/repo/owner",
 	REPO_BRANCH_TITLE = "$:/config/github-pr-assistant/repo/branch",
 	REPO_TITLE = "$:/config/github-pr-assistant/repo";
 
@@ -25,7 +23,6 @@ let pullrequest,
 const updateStatus = function(text,fields) {
 	$tw.wiki.addTiddler(new $tw.Tiddler({title: pullrequest.stateTitle, text: text},fields));
 };
-
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes
 const initPR = function(stateTitle) {
@@ -47,14 +44,12 @@ const addToPr = function(path,data,removeFile) {
 	}
 };
 
-async function loadOctokit() {
-	updateStatus(`loading external library`);
+function loadOctokit() {
 	if(!$tw.Octokit) {
-		const { Octokit } = await import($tw.wiki.getTiddlerText(OCTOKIT_URL_TILE));
-		$tw.Octokit = Octokit;
+		$tw.Octokit = require("$:/plugins/sq/github-pr-assistant/octokit.js").Octokit;
 	}
 	if(!$tw.createPullRequest) {
-		const { createPullRequest, DELETE_FILE } = await import($tw.wiki.getTiddlerText(CREATEPULLREQUEST_URL_TITLE));
+		const { createPullRequest, DELETE_FILE } = require("$:/plugins/sq/github-pr-assistant/octokit-createPullRequest.js");
 		$tw.createPullRequest = createPullRequest;
 		$tw.cprDELETEFILE = DELETE_FILE;
 	}
@@ -64,7 +59,7 @@ const createPR = async function() {
 	let octokit,
 		metadata = pullrequest.metadata;
 	try {
-		await loadOctokit();
+		loadOctokit();
 		const MyOctokit = $tw.Octokit.plugin($tw.createPullRequest);
 		const token = $tw.utils.getPassword("github-docs-pr");
 		if(!token || !token.length) {
