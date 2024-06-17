@@ -26,6 +26,7 @@ tags: $:/tags/Stylesheet
 }
 
 .tc-tour-panel-navigation .tc-btn-big-green {
+	border-radius: 0.25em;
 	margin: 0;
 }
 
