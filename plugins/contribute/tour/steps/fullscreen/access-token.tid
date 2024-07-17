@@ -11,7 +11,7 @@ condition: [password-exists[github-docs-pr]match[no]]
 
 The link below will open the ~GitHub page for creating an access token with the minimum required permissions already selected. Add a note to remind yourself what the access token is for, and create the token and copy it.
 
-[[Create an access token|https://github.com/settings/tokens/new?scopes=public_repo]]
+{{$:/plugins/sq/contribute/tour/config/access-token-link}}
 
 Please enter below the access token you have created:
 

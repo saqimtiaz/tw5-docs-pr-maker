@@ -1,23 +1,45 @@
 title: $:/plugins/tiddlywiki/tour/panel
 tags: $:/tags/PageTemplate
 
+\procedure _tour-prevButton()
+<$list filter="[all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}count[]compare:number:gt[0]]" variable="ignore">
+	<$button class="tc-btn-big-green" style="background-color: red;">
+		<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]allbefore{$:/state/tour/step}filter<filter-by-condition>last[]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]first[]] }}}/>
+		{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
+		back
+	</$button>
+</$list>
+\end
+
+\procedure _tour-nextButton()
+<$button class="tc-btn-big-green" style="background-color: purple;">
+	<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]allafter{$:/state/tour/step}filter<filter-by-condition>first[]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]last[]] }}}/>
+	{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
+	next
+</$button>
+\end
+
+\procedure _tour-closeButton()
+<$button class="tc-btn-big-green">
+	<$action-setfield $tiddler="$:/config/ShowTour" $field="text" $value="no"/>
+	Close Tour
+</$button>
+\end
+
 \procedure tour-buttons()
 \procedure tv-action-refresh-policy() always
 <div class="tc-tour-panel-navigation">
-	<$list filter="[all[shadows+tiddlers]tag[$:/tags/TourStep]before{$:/state/tour/step}count[]compare:number:gt[0]]" variable="ignore">
-		<$button class="tc-btn-big-green" style="background-color: red;">
-			<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]allbefore{$:/state/tour/step}filter<filter-by-condition>last[]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]first[]] }}}/>
-			{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
-			back
-		</$button>
-	</$list>
-	<$button class="tc-btn-big-green" style="background-color: purple;">
-		<$action-setfield $tiddler="$:/state/tour/step" $field="text" $value={{{ [all[shadows+tiddlers]tag[$:/tags/TourStep]allafter{$:/state/tour/step}filter<filter-by-condition>first[]] :else[all[shadows+tiddlers]tag[$:/tags/TourStep]last[]] }}}/>
-		{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}
-		next
-	</$button>
+<<_tour-prevButton>> <<_tour-nextButton>>
 </div>
 \end
+
+\procedure tour-close()
+\procedure tv-action-refresh-policy() always
+<div class="tc-tour-panel-navigation">
+	<<_tour-prevButton>> <<_tour-closeButton>>
+<div class="tc-tour-panel-navigation">
+\end
+
 
 \procedure filter-by-condition()
 [<currentTiddler>has[condition]subfilter{!!condition}limit[1]] :else[<currentTiddler>!has[condition]then[true]]
