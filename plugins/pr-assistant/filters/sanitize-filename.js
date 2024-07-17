@@ -40,7 +40,7 @@ Filter operator to check whether a password exists in local storage
 		let extension = "tid";
 		// If the filename already ends in the extension then remove it
 		if(filename.substring(filename.length - extension.length) === extension) {
-			filename = filename.substring(0,filename.length - extension.length);
+			filename = filename.substring(0,filename.length - extension.length - 1);
 		}
 		
 		// Truncate the filename if it is too long
