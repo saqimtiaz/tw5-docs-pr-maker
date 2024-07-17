@@ -69,7 +69,7 @@ Filter operator to check whether a password exists in local storage
 		let	count = 1,
 			qualifiedName = `${filename}.${extension}`; 
 		while(fileExists(qualifiedName)) {
-			qualifiedName = filename + "_" + count + extension;
+			qualifiedName = filename + "_" + count + "." + extension;
 			count++;
 		}
 		return qualifiedName;

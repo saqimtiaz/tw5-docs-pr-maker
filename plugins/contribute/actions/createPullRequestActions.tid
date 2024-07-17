@@ -17,7 +17,7 @@ title: $:/plugins/sq/contribute/createPullRequestActions
 <$list filter="[<CONTRIBUTION_FORM_STATE>get[text]enlist-input[]is[tiddler]]">
 	<$wikify name="data" text={{$:/core/templates/tid-tiddler}}>
 		<$let
-			path={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>trim:start[../node_modules/tiddlywiki/editions/tw5.com/tiddlers/]] :else[<currentTiddler>trim:start[$:/editions/tw5.com/]trim:start[$:/]addsuffix[.tid]] }}}
+			path={{{ [[$:/config/OriginalTiddlerPaths]getindex<currentTiddler>trim:start[../node_modules/tiddlywiki/editions/tw5.com/tiddlers/]] :else[<currentTiddler>trim:start[$:/editions/tw5.com/]trim:start[$:/]addsuffix[.tid]sanitize-filename[$:/config/OriginalTiddlerPaths]] }}}
 			fullPath=`editions/tw5.com/tiddlers/$(path)$`
 		>
 			<$action-sendmessage $message="tm-pr-add" path=<<fullPath>> data=<<data>>/>
