@@ -1,0 +1,19 @@
+tags: $:/tags/Stylesheet
+title: $:/plugins/sq/contribute/styles/tour
+
+\rules only filteredtranscludeinline transcludeinline macrodef macrocallinline macrocallblock
+
+.tour-contribute-docs {
+	&.tc-tour-panel-fullscreen .tc-tour-panel-inner {
+		width: 40%;
+		margin: 20% auto;
+		font-size: 1.2em;
+		line-height: 1.5em;
+	}
+
+	&.tc-tour-panel-fullscreen .tc-tour-panel-controls, &.tc-tour-panel .tc-tour-panel-banner-image, .tc-tour-panel-controls .tc-tour-panel-list-button {
+		display: none;
+	}
+
+}
+

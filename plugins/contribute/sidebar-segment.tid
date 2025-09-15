@@ -1,0 +1,5 @@
+list-after: $:/core/ui/SideBarSegments/page-controls
+tags: $:/tags/SideBarSegment
+title: $:/plugins/sq/contribute/ui/sidebar-segment
+
+<<github-login>>

@@ -1,10 +1,11 @@
 title: Contribute Help
 
 \procedure help()
+\import [[$:/plugins/tiddlywiki/tour/variables]]
 <$list filter="[<navigateTo>match[walkthrough]]">
 	<!-- start tour -->
 	<$action-deletetiddler $filter="$:/state/tour/step $:/config/ShowTour"/>
-	<$transclude $tiddler="$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step"/>
+	<$transclude $variable="tour-start" title={{$:/config/CurrentTour}}/>
 </$list>
 \end
 

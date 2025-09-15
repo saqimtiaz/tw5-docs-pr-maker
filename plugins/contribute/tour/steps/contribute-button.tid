@@ -1,0 +1,10 @@
+caption: Edit and create tiddlers to update the documentation
+hint-selector: .submit-docs-banner a
+hint-text: where is the submission form button?
+step-success-filter: [[$:/StoryList]contains[Submit documentation updates]]
+tags: $:/tags/Tour/ContributingDocumentation
+title: $:/plugins/sq/contribute/tour/contributing-documentation/steps/contribute-button
+
+Once you are ready to submit your work, open the submission form using the button in the bottom right corner.
+
+In this form you can review which tiddlers will be submitted, and provide a short description of your changes.

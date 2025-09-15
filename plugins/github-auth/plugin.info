@@ -1,0 +1,7 @@
+{
+	"title": "$:/plugins/sq/github-auth",
+	"name": "GitHub Auth",
+	"description": "Github Auth",
+	"list": "readme",
+	"version": "1.0.0"
+}

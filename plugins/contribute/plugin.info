@@ -2,5 +2,7 @@
 	"title": "$:/plugins/sq/contribute",
 	"name": "Contribute",
 	"description": "Submit documentation contributions",
-	"list": "readme"
+	"list": "readme",
+	"plugin-priority": "1",
+	"version": "2.0.0"
 }
