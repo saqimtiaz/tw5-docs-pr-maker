@@ -1,0 +1,13 @@
+caption: Sign in to ~GitHub to continue
+display-mode: fullscreen
+step-success-filter: [<github.username>!is[blank]]
+success-message: You are now signed in as <<github.username>>!
+tags: $:/tags/Tour/ContributingDocumentation
+title: $:/plugins/sq/contribute/tour/contributing-documentation/steps/github
+
+
+* This will allow your changes to be submitted on your behalf to the ~TiddlyWiki project.
+* The sign-in automatically expires after about two hours, and you can sign out at any time manually.
+* Your sign-in credentials are stored in session storage and are cleared when this browser tab is closed.
+
+<<github-login>>

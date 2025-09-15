@@ -15,11 +15,10 @@ title: Submit documentation updates
 \end
 
 \function disabled()
-[<CONTRIBUTION_FORM_STATE>has[pr-title]has[pr-body]has.payload[]] :then[<CONTRIBUTION_MAKEPR_STATE>!status[inprogress]then[no]else[yes]] :else[[yes]]
+[<CONTRIBUTION_FORM_STATE>has[pr-title]has[pr-body]has.payload[]] :then[<CONTRIBUTION_MAKEPR_STATE>!status[inprogress]then[no]else[yes]] :filter[<github.username>!is[blank]] :else[[yes]]
 \end
 
 <div class="submission-form">
-
 	<$button set=<<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>> setTo={{{ [<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>get[text]match[show]then[hide]else[show]] }}} tooltip="Load and resume work on a saved submission" class="btn-big btn-muted tc-float-right">
 		Load a saved submission? <!--<$transclude tiddler={{{[<CONTRIBUTION_LOADPR_FORM_DISPLAY_STATE>get[text]match[show]then[$:/core/images/up-arrow]else[$:/core/images/down-arrow]]}}} />-->
 	</$button>
@@ -53,17 +52,12 @@ title: Submit documentation updates
 			<$edit-text tiddler=<<CONTRIBUTION_FORM_STATE>> field="pr-body" default="" tag="textarea" class="tc-edit-texteditor"/>
 		</label>
 	</div>
-
-	<$let null={{$:/temp/refresh-token-status}}>
-		<$list filter="[password-exists[github-docs-pr]match[no]]">
-			<div class="form-group error-missing-token">
-				<h2>Provide a [[GitHub authentication token|https://github.com/settings/tokens/new?scopes=public_repo]]:</h2>
-				<$eventcatcher $focusout=<<bluractions>> selector="input" tag="span">
-					<$password name="github-docs-pr"/>
-				</$eventcatcher>
-			</div>
-		</$list>
-	</$let>
+	<%if [<github.username>is[blank]] %>
+		<div class="form-group error-missing-token">
+			<h2>Please sign-in to continue:</h2>
+			<<github-login>>
+		</div>
+	<%endif%>
 	<div class="form-footer">
 		<$button
 			actions=<<submitChanges>> 
@@ -88,7 +82,11 @@ title: Submit documentation updates
 			<$transclude $tiddler="$:/core/images/help"/>
 		</$button>
 	</div>
-
+	<p>
+	<%if [<github.username>!is[blank]]%>
+		<<github-login>>
+	<%endif%>
+	</p>
 	<$list filter="[<CONTRIBUTION_MAKEPR_STATE>get[text]!is[blank]]">
 		<div class="submission-status">
 			<$list filter="[<CONTRIBUTION_MAKEPR_STATE>has[link]]" emptyMessage="""<$text text=<<currentTiddler>>/>""">

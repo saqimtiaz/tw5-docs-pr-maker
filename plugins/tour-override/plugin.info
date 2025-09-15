@@ -1,0 +1,8 @@
+{
+	"title": "$:/plugins/tw/tour-override",
+	"name": "Tour overrides",
+	"description": "Overrides of tour plugin",
+	"list": "readme",
+	"plugin-priority": "1",
+	"version": "1.0.0"
+}

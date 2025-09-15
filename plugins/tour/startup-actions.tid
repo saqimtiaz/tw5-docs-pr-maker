@@ -1,4 +1,0 @@
-title: $:/plugins/tiddlywiki/tour/startup-actions
-tags: $:/tags/StartupAction
-
-{{$:/plugins/tiddlywiki/tour/actions/initialise-current-tour-step}}

@@ -61,7 +61,9 @@ const createPR = async function() {
 	try {
 		loadOctokit();
 		const MyOctokit = $tw.Octokit.plugin($tw.createPullRequest);
-		const token = $tw.utils.getPassword("github-docs-pr");
+//		const token = $tw.utils.getPassword("github-docs-pr");
+		const token = sessionStorage.getItem("gh_access_token");
+
 		if(!token || !token.length) {
 			alert("Please set the github personal access token");
 			return;

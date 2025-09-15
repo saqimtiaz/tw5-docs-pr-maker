@@ -11,7 +11,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout PR maker   
         uses: actions/checkout@v2
@@ -21,18 +21,17 @@ jobs:
       - name: Checkout TW branch tiddlywiki-com
         uses: actions/checkout@v2
         with:
-            repository: jermolene/TiddlyWiki5
+            repository: TiddlyWiki/TiddlyWiki5
             ref: tiddlywiki-com
             path: tiddlywiki
 
       - name: Setup node
-        uses: actions/setup-node@v2-beta
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
+          node-version: '20'
         
       - name: Build
         run: |
-            cp -fr ./pr-maker/tiddlers ./tiddlywiki/editions/tw5.com/tiddlers
             cp -fr ./pr-maker/plugins ./tiddlywiki/editions/tw5.com/plugins
             node tiddlywiki/tiddlywiki ./tiddlywiki/editions/tw5.com --output ./output --build index
             ls
