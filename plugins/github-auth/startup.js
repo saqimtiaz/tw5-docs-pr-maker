@@ -81,7 +81,7 @@ class GithubAuth {
 		const warningTime = ms - 5*60*1000;
 		if(warningTime > 0) {
 			this.warningTimer = setTimeout(()=>{
-				alert("Your GitHub session will expire in 5 minutes. Please save your work.");
+				//alert("Your GitHub session will expire in 5 minutes. Please save your work.");
 			}, warningTime);
 		}
 
@@ -146,7 +146,7 @@ class GithubAuth {
 			this.#saveToken(access_token, expires_in);
 
 			this.#fetchUserAndSaveState().then(()=>{
-				alert("Logged in to GitHub!");
+				//alert("Logged in to GitHub!");
 			}).catch(()=>{
 				alert("Failed to fetch GitHub username.");
 			});
