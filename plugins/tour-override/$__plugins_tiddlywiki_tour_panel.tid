@@ -13,10 +13,12 @@ title: $:/plugins/tiddlywiki/tour/panel
 		</$button>
 	<%endif%>
 	<%if [function[tour-is-not-last-step]] %>
-		<$button class="tc-btn-big-green tc-tour-panel-navigation-next">
-			<<tour-next-step>>
-			next
-		</$button>
+		<%if [<step-success-filter>is[blank]] :else[subfilter<step-success-filter>] %>
+			<$button class="tc-btn-big-green tc-tour-panel-navigation-next">
+				<<tour-next-step>>
+				next
+			</$button>
+		<%endif%>
 	<%endif%>
 	<%if [function[tour-is-last-step]] %>
 		<$confetti/>
@@ -50,6 +52,7 @@ title: $:/plugins/tiddlywiki/tour/panel
 		</$button>
 	</div>
 <%endif%>
+<<tour-buttons>>
 \end tour-step-success-filter-not-satisfied
 
 \procedure tour-step-success-filter-satisfied()
